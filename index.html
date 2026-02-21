@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shang Bauhinia Residences — Investment Intelligence</title>
+<meta name="description" content="Smart investment calculator and buyer guide for Shang Bauhinia Residences, Cebu. Calculate the true cost of waiting on pre-selling luxury property.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a1f;
+  --cream: #faf8f4;
+  --warm-white: #f5f2ec;
+  --gold: #b8944a;
+  --gold-light: #d4b76a;
+  --gold-muted: rgba(184,148,74,0.12);
+  --charcoal: #2d2d33;
+  --muted: #8a8a8f;
+  --border: rgba(184,148,74,0.2);
+  --accent-red: #c44a3f;
+  --accent-green: #4a8c5c;
+  --shadow-soft: 0 4px 24px rgba(0,0,0,0.06);
+  --shadow-medium: 0 8px 40px rgba(0,0,0,0.08);
+  --radius: 12px;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans); background: var(--cream); color: var(--ink);
+  line-height: 1.65; font-weight: 400; -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999;
+}
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,248,244,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); transition: box-shadow 0.3s; }
+.nav.scrolled { box-shadow: var(--shadow-soft); }
+.nav-inner { max-width: 1100px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; }
+.nav-brand { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; color: var(--ink); letter-spacing: 0.02em; }
+.nav-brand span { color: var(--gold); }
+.nav-links { display: flex; gap: 20px; align-items: center; }
+.nav-links a { font-size: 0.78rem; font-weight: 500; color: var(--muted); text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.25s; }
+.nav-links a:hover { color: var(--gold); }
+.nav-links a.nav-cta { background: var(--gold); color: var(--ink); padding: 8px 18px; border-radius: 60px; font-weight: 600; transition: all 0.25s; }
+.nav-links a.nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+.hero { padding: 140px 32px 80px; text-align: center; position: relative; overflow: hidden; }
+.hero::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 1px; background: var(--gold); }
+.hero-eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: inline-flex; align-items: center; gap: 10px; }
+.hero-eyebrow::before, .hero-eyebrow::after { content: ''; width: 24px; height: 1px; background: var(--gold); }
+.hero h1 { font-family: var(--serif); font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 700; line-height: 1.15; color: var(--ink); margin-bottom: 18px; }
+.hero h1 em { font-style: italic; color: var(--gold); }
+.hero-sub { font-size: 1.05rem; color: var(--muted); max-width: 560px; margin: 0 auto 36px; font-weight: 300; line-height: 1.7; }
+.hero-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; background: var(--ink); color: var(--cream); font-family: var(--sans); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 60px; transition: all 0.3s; border: none; cursor: pointer; }
+.btn-primary:hover { background: var(--charcoal); transform: translateY(-1px); box-shadow: var(--shadow-medium); }
+.btn-primary svg { width: 16px; height: 16px; }
+.btn-secondary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; background: transparent; color: var(--ink); font-family: var(--sans); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 60px; border: 1.5px solid var(--border); transition: all 0.3s; cursor: pointer; }
+.btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+.section { max-width: 1100px; margin: 0 auto; padding: 80px 32px; }
+.section-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.section-title { font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 700; line-height: 1.2; margin-bottom: 12px; }
+.section-desc { font-size: 0.95rem; color: var(--muted); max-width: 600px; font-weight: 300; line-height: 1.7; }
+.calc-wrapper { margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+@media (max-width: 768px) { .calc-wrapper { grid-template-columns: 1fr; } }
+.calc-panel { background: #fff; border-radius: var(--radius); padding: 36px; border: 1px solid rgba(0,0,0,0.05); box-shadow: var(--shadow-soft); }
+.calc-panel-title { font-family: var(--serif); font-size: 1.3rem; font-weight: 700; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.field { margin-bottom: 22px; }
+.field label { display: block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.field select, .field input[type="number"] { width: 100%; padding: 12px 16px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; font-family: var(--sans); font-size: 0.95rem; color: var(--ink); background: var(--warm-white); transition: border-color 0.25s, box-shadow 0.25s; outline: none; appearance: none; -webkit-appearance: none; }
+.field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a8a8f' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+.field input:focus, .field select:focus { border-color: var(--gold); box-shadow: 0 0 0 3px var(--gold-muted); }
+.range-field { margin-bottom: 24px; }
+.range-field .range-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+.range-field label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+.range-value { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; color: var(--gold); }
+input[type="range"] { width: 100%; height: 6px; -webkit-appearance: none; appearance: none; background: linear-gradient(to right, var(--gold) 0%, var(--gold) var(--fill, 50%), #e0ddd6 var(--fill, 50%), #e0ddd6 100%); border-radius: 3px; outline: none; cursor: pointer; }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; background: #fff; border: 2px solid var(--gold); border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.12); cursor: pointer; transition: transform 0.15s; }
+input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+.calc-btn { width: 100%; padding: 15px; background: var(--ink); color: var(--cream); font-family: var(--sans); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; border: none; border-radius: 8px; cursor: pointer; transition: all 0.25s; margin-top: 8px; }
+.calc-btn:hover { background: var(--charcoal); }
+.results-panel { display: flex; flex-direction: column; }
+.result-card { padding: 24px; border-radius: 10px; margin-bottom: 16px; position: relative; overflow: hidden; }
+.result-card.loss { background: linear-gradient(135deg, #fdf2f1, #fef6f5); border: 1px solid rgba(196,74,63,0.12); }
+.result-card.gain { background: linear-gradient(135deg, #f0f7f2, #f5faf6); border: 1px solid rgba(74,140,92,0.12); }
+.result-card.neutral { background: linear-gradient(135deg, var(--gold-muted), rgba(184,148,74,0.06)); border: 1px solid var(--border); }
+.result-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+.result-card.loss .result-label { color: var(--accent-red); }
+.result-card.gain .result-label { color: var(--accent-green); }
+.result-card.neutral .result-label { color: var(--gold); }
+.result-number { font-family: var(--serif); font-size: 1.7rem; font-weight: 700; line-height: 1.2; }
+.result-card.loss .result-number { color: var(--accent-red); }
+.result-card.gain .result-number { color: var(--accent-green); }
+.result-card.neutral .result-number { color: var(--gold); }
+.result-note { font-size: 0.82rem; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+.insight-box { background: var(--ink); color: var(--cream); border-radius: 10px; padding: 24px; margin-top: auto; }
+.insight-box .insight-icon { width: 32px; height: 32px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; font-size: 0.85rem; }
+.insight-box h4 { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; color: var(--gold-light); }
+.insight-box p { font-size: 0.85rem; line-height: 1.65; color: rgba(255,255,255,0.7); }
+.insight-box a { color: var(--gold-light); text-decoration: underline; text-underline-offset: 2px; }
+.insight-box a:hover { color: #fff; }
+.comparison-bar-section { margin-top: 16px; }
+.comparison-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.bar-container { background: #e8e5df; border-radius: 6px; overflow: hidden; height: 36px; display: flex; }
+.bar-segment { display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 600; color: #fff; letter-spacing: 0.03em; transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1); min-width: 0; overflow: hidden; white-space: nowrap; }
+.bar-invest { background: var(--accent-green); }
+.bar-lost { background: var(--accent-red); }
+.bar-legend { display: flex; gap: 20px; margin-top: 8px; }
+.bar-legend span { font-size: 0.72rem; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+.bar-legend span::before { content: ''; width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.bar-legend .leg-invest::before { background: var(--accent-green); }
+.bar-legend .leg-lost::before { background: var(--accent-red); }
+.results-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; min-height: 380px; color: var(--muted); }
+.results-placeholder svg { width: 56px; height: 56px; stroke: var(--border); margin-bottom: 16px; }
+.results-placeholder p { font-size: 0.9rem; font-weight: 300; max-width: 260px; line-height: 1.6; }
+.disclaimer-bar { max-width: 1100px; margin: -32px auto 0; padding: 0 32px 48px; }
+.disclaimer-bar p { font-size: 0.72rem; color: var(--muted); line-height: 1.6; border-top: 1px solid var(--border); padding-top: 16px; font-style: italic; }
+.mid-cta { background: linear-gradient(135deg, var(--ink) 0%, #2a2a30 100%); padding: 56px 32px; text-align: center; position: relative; overflow: hidden; }
+.mid-cta::before { content: ''; position: absolute; top: -50%; left: -20%; width: 140%; height: 200%; background: radial-gradient(ellipse at center, rgba(184,148,74,0.06) 0%, transparent 60%); pointer-events: none; }
+.mid-cta-inner { max-width: 680px; margin: 0 auto; position: relative; }
+.mid-cta h3 { font-family: var(--serif); font-size: 1.6rem; font-weight: 700; color: var(--cream); margin-bottom: 10px; }
+.mid-cta p { font-size: 0.9rem; color: rgba(255,255,255,0.55); margin-bottom: 24px; font-weight: 300; line-height: 1.65; }
+.mid-cta .btn-gold { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; background: var(--gold); color: var(--ink); font-family: var(--sans); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 60px; transition: all 0.3s; }
+.mid-cta .btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: var(--shadow-medium); }
+.mid-cta .btn-gold svg { width: 16px; height: 16px; }
+.faq-section { border-top: 1px solid var(--border); }
+.faq-grid { margin-top: 40px; }
+.faq-item { border-bottom: 1px solid rgba(0,0,0,0.06); }
+.faq-question { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 22px 0; cursor: pointer; user-select: none; background: none; border: none; width: 100%; text-align: left; font-family: var(--sans); }
+.faq-question:hover .faq-q-text { color: var(--gold); }
+.faq-num { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; color: var(--gold); min-width: 32px; padding-top: 1px; }
+.faq-q-text { flex: 1; font-size: 1.02rem; font-weight: 600; color: var(--ink); line-height: 1.45; transition: color 0.2s; }
+.faq-toggle { width: 28px; height: 28px; border-radius: 50%; background: var(--gold-muted); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; transition: transform 0.3s, background 0.3s; }
+.faq-item.open .faq-toggle { transform: rotate(45deg); background: var(--gold); }
+.faq-item.open .faq-toggle svg line { stroke: #fff; }
+.faq-toggle svg { width: 14px; height: 14px; }
+.faq-toggle svg line { stroke: var(--gold); stroke-width: 2; }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1), padding 0.3s; }
+.faq-item.open .faq-answer { max-height: 800px; }
+.faq-answer-inner { padding: 0 0 24px 48px; font-size: 0.92rem; color: #555; line-height: 1.75; max-width: 720px; }
+.faq-answer-inner p + p { margin-top: 10px; }
+.faq-tag { display: inline-block; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; margin-bottom: 10px; }
+.faq-tag.logical { background: rgba(74,140,92,0.1); color: var(--accent-green); }
+.faq-tag.emotional { background: rgba(196,74,63,0.1); color: var(--accent-red); }
+.faq-tag.brand { background: var(--gold-muted); color: var(--gold); }
+.faq-tag.location { background: rgba(74,100,180,0.1); color: #4a64b4; }
+.faq-inline-cta { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; padding: 8px 18px; background: var(--ink); color: var(--cream); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; border-radius: 6px; transition: all 0.25s; }
+.faq-inline-cta:hover { background: var(--charcoal); }
+.cta-banner { background: var(--ink); color: var(--cream); text-align: center; padding: 80px 32px; position: relative; overflow: hidden; }
+.cta-banner::before { content: ''; position: absolute; top: -50%; left: -20%; width: 140%; height: 200%; background: radial-gradient(ellipse at center, rgba(184,148,74,0.08) 0%, transparent 60%); pointer-events: none; }
+.cta-banner h2 { font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 700; margin-bottom: 14px; position: relative; }
+.cta-banner p { font-size: 0.95rem; color: rgba(255,255,255,0.6); margin-bottom: 32px; font-weight: 300; position: relative; max-width: 540px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+.cta-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; }
+.cta-link { padding: 14px 32px; border-radius: 60px; font-family: var(--sans); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
+.cta-link.primary { background: var(--gold); color: var(--ink); }
+.cta-link.primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+.cta-link.secondary { border: 1px solid rgba(255,255,255,0.2); color: var(--cream); }
+.cta-link.secondary:hover { border-color: var(--gold); color: var(--gold); }
+.cta-link.tertiary { border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.6); }
+.cta-link.tertiary:hover { border-color: rgba(255,255,255,0.3); color: var(--cream); }
+.footer { padding: 32px; text-align: center; border-top: 1px solid var(--border); }
+.footer p { font-size: 0.75rem; color: var(--muted); line-height: 1.6; }
+.footer a { color: var(--gold); text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.animate-in { opacity: 0; animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; } .delay-3 { animation-delay: 0.3s; }
+@media (max-width: 640px) {
+  .nav-links a.hide-mobile { display: none; }
+  .hero { padding: 120px 20px 64px; }
+  .section { padding: 56px 20px; }
+  .calc-panel { padding: 24px; }
+  .faq-answer-inner { padding-left: 32px; }
+  .cta-links { flex-direction: column; align-items: center; }
+  .disclaimer-bar { padding: 0 20px 32px; }
+  .hero-buttons { flex-direction: column; align-items: center; }
+  .mid-cta { padding: 48px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">Shang <span>Bauhinia</span></div>
+    <div class="nav-links">
+      <a href="#calculator">Calculator</a>
+      <a href="#faq-sbr" class="hide-mobile">FAQ</a>
+      <a href="https://sbr-overview.ronnelestrada.com/" target="_blank" class="hide-mobile">Overview</a>
+      <a href="https://spibyronnel.setmore.com" target="_blank" class="nav-cta">Book a Visit</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-eyebrow animate-in">Investment Intelligence</div>
+  <h1 class="animate-in delay-1">The True Cost of <em>Waiting</em></h1>
+  <p class="hero-sub animate-in delay-2">Pre-selling prices are the lowest they'll ever be. Every month you wait has a peso value. See exactly what inaction costs — and what acting early gains.</p>
+  <div class="hero-buttons animate-in delay-3">
+    <a href="#calculator" class="btn-primary">Calculate Now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M7 7h10v10"/></svg></a>
+    <a href="https://spibyronnel.setmore.com" target="_blank" class="btn-secondary">Book a Site Visit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></a>
+  </div>
+</header>
+
+<section class="section" id="calculator">
+  <div class="section-label animate-in">Opportunity Cost Calculator</div>
+  <h2 class="section-title animate-in delay-1">What Is Waiting Costing You?</h2>
+  <p class="section-desc animate-in delay-2">Input your target unit details below. The calculator shows what every month of delay costs in real peso terms — factoring in price escalation, equity growth, and the bank alternative.</p>
+  <div class="calc-wrapper">
+    <div class="calc-panel animate-in delay-3">
+      <h3 class="calc-panel-title">Your Investment Scenario</h3>
+      <div class="field"><label>Unit Type</label>
+        <select id="unitType">
+          <option value="studio">Studio — 35.33 sqm (from ₱10.89M)</option>
+          <option value="1br-small">1 Bedroom — 50.45 sqm (from ₱17.37M)</option>
+          <option value="1br-mid" selected>1 Bedroom — 56.83 sqm (from ₱18.82M)</option>
+          <option value="1br-large">1 Bedroom — 64.12 sqm (from ₱23.54M)</option>
+          <option value="2br-typical">2 Bedroom Typical — 95.02 sqm (from ₱30.45M)</option>
+          <option value="2br-large">2 Bedroom Typical — 103.51 sqm (from ₱35.56M)</option>
+          <option value="2br-sig">2 Bedroom Signature — 127.39 sqm (from ₱45.50M)</option>
+          <option value="3br-sig">3 Bedroom Signature — 186.68 sqm (from ₱74.80M)</option>
+        </select>
+      </div>
+      <div class="field"><label>Current Pre-Selling Price (₱)</label><input type="number" id="currentPrice" value="18820000" min="1000000" step="100000"></div>
+      <div class="range-field"><div class="range-header"><label>Annual Price Escalation</label><span class="range-value" id="escDisplay">8%</span></div><input type="range" id="escalation" min="3" max="15" value="8" step="0.5"></div>
+      <div class="range-field"><div class="range-header"><label>Months of Delay</label><span class="range-value" id="delayDisplay">12 months</span></div><input type="range" id="delayMonths" min="1" max="36" value="12"></div>
+      <div class="range-field"><div class="range-header"><label>Bank Savings Rate (Alternative)</label><span class="range-value" id="bankDisplay">5.5%</span></div><input type="range" id="bankRate" min="1" max="8" value="5.5" step="0.25"></div>
+      <button class="calc-btn" onclick="calculate()">Calculate Cost of Waiting</button>
+    </div>
+    <div class="calc-panel results-panel" id="resultsPanel">
+      <div class="results-placeholder" id="placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <p>Adjust your scenario and tap <strong>Calculate</strong> to reveal the true cost of waiting.</p>
+      </div>
+      <div id="results" style="display:none;"></div>
+    </div>
+  </div>
+</section>
+
+<div class="disclaimer-bar"><p>Disclaimer: This calculator provides estimates based on user-defined assumptions and does not constitute financial advice. Actual price changes depend on market conditions, developer pricing decisions, and economic factors. Past appreciation rates do not guarantee future performance. Consult a licensed financial professional before making investment decisions.</p></div>
+
+<div class="mid-cta">
+  <div class="mid-cta-inner">
+    <h3>Numbers Tell a Story. The Show Suite Tells the Whole Story.</h3>
+    <p>Walk through the actual finishes, experience the ceiling heights, see the views. A 45-minute private tour at the Waterfront Hotel Cebu show suite will answer more questions than any calculator can.</p>
+    <a href="https://spibyronnel.setmore.com" target="_blank" class="btn-gold">Book a Private Site Visit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></a>
+  </div>
+</div>
+
+<!-- FAQ 1: SHANG PROPERTIES & SBR -->
+<section class="faq-section" id="faq-sbr" style="background:#fff;">
+  <div class="section">
+    <div class="section-label">About the Developer & Project</div>
+    <h2 class="section-title">Shang Properties & Bauhinia Residences</h2>
+    <p class="section-desc">Everything you need to know about the developer behind the project and what makes Shang Bauhinia different from anything else in Cebu.</p>
+    <div class="faq-grid">
+
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">01</span><span class="faq-q-text">Who is Shang Properties and why should I trust them?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag brand">Developer Credibility</span>
+        <p>Shang Properties, Inc. has been <strong>listed on the Philippine Stock Exchange (PSE) since 1991</strong> — over three decades of public accountability and quarterly financial reporting. They are part of The Kuok Group (Malaysia), with over ₱50 billion in managed assets, and affiliated with Shangri-La Hotels & Resorts and Kerry Properties Limited.</p>
+        <p>Since entering residential development in 2002, they have completed every project on schedule. Their portfolio — St. Francis Shangri-La Place, The Rise Makati, Horizon Homes BGC, Shang Salcedo Place, and more — has delivered <strong>129% to 322% total appreciation</strong>. That's verifiable public record, not marketing language.</p>
+        <p>Unlike many developers that rely on pre-selling deposits to fund construction, Shang Properties has institutional backing. Your building gets built regardless of sales velocity.</p>
+      </div></div></div>
+
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">02</span><span class="faq-q-text">What is Shang Bauhinia Residences and what makes it different?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag brand">Project Overview</span>
+        <p>Shang Bauhinia Residences is a <strong>53-storey luxury residential tower</strong> on Governor Cuenco Avenue corner Bauhinia Drive, Kasambagan, Cebu City. It is Shang Properties' first project outside Metro Manila — a strategic decision that signals their confidence in Cebu's long-term potential.</p>
+        <p>The project offers 1,069 units — Studios, 1-Bedroom, 2-Bedroom Typical, 2-Bedroom Signature, 3-Bedroom Signature, Garden units, and Penthouses. All units are <strong>delivered fully finished and move-in ready</strong> with digital locksets, laminated wood flooring, inverter AC systems, sintered stone countertops, modular kitchen cabinets, complete appliances, full bathroom fixtures, and fire safety systems.</p>
+        <p>What sets it apart: six internationally acclaimed design firms (P&T Group, FM Architettura, P Landscape), 5,120 sqm of dual-tier resort amenities, SPMSI hospitality-grade property management, 100% residential backup power, and a building-wide water softener system. None of these are standard in Cebu.</p>
+        <a href="https://sbr-overview.ronnelestrada.com/" target="_blank" class="faq-inline-cta">View Full Project Overview →</a>
+      </div></div></div>
+
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">03</span><span class="faq-q-text">Where exactly is the project located?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag location">Location</span>
+        <p>The project sits at the convergence of Cebu's three major business districts — a "quiet premium zone" that offers CBD-level access without the density and congestion of being inside the commercial districts.</p>
+        <p><strong>Cebu IT Park:</strong> 0.3 km (3-minute walk). <strong>Cebu Country Club:</strong> 0.2 km (golf course views). <strong>Ayala Center Cebu:</strong> 1.7 km. <strong>Cebu Business Park:</strong> 1.9 km. Nearby schools include Maria Montessori International (2.1 km), Sacred Heart-Ateneo de Cebu (6.9 km), and University of San Carlos (3.1 km). Healthcare access via Perpetual Succour Hospital (2.0 km) and Chong Hua Hospital.</p>
+        <a href="https://spibyronnel.setmore.com" target="_blank" class="faq-inline-cta">Visit the Location in Person →</a>
+      </div></div></div>
+
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">04</span><span class="faq-q-text">What unit types are available and what do they cost?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag brand">Units & Pricing</span>
+        <p><strong>Studio (35.33 sqm):</strong> ₱10.89M – ₱14.66M. Ideal for investment or singles near IT Park.</p>
+        <p><strong>1-Bedroom (50.45 – 64.12 sqm):</strong> ₱17.37M – ₱25.12M. All include 1 parking. Most versatile for personal use and rental income.</p>
+        <p><strong>2-Bedroom Typical (95.02 – 103.51 sqm):</strong> ₱30.45M – ₱43M. Families of 3–4 or premium rental positioning.</p>
+        <p><strong>2-Bedroom Signature (127.39 sqm):</strong> From ₱45.50M. Enhanced finishes with branded appliances, exclusive elevator access, and Sky Lounge privileges.</p>
+        <p><strong>3-Bedroom Signature (186.68 sqm):</strong> From ₱74.80M. Flagship residence — master suite with walk-in wardrobe, spa bathroom, and multiple balconies.</p>
+        <p>Pre-selling pricing at ₱290K–₱430K/sqm represents the lowest entry point in the project's lifecycle.</p>
+        <a href="https://spibyronnel.setmore.com" target="_blank" class="faq-inline-cta">Discuss Unit Options in a Private Consultation →</a>
+      </div></div></div>
+
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">05</span><span class="faq-q-text">What are the payment terms and financing options?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Financing</span>
+        <p><strong>Reservation:</strong> ₱50,000 (fully applied to the down payment).</p>
+        <p><strong>Standard scheme:</strong> 20% down payment over 24 months during construction. 80% balance due at turnover (December 2031) — payable in cash or via bank financing (BDO, BPI, Metrobank) with terms up to 25 years.</p>
+        <p><strong>Accelerated payment:</strong> Pay 50% as DP and receive an <strong>8% discount on the total contract price</strong>. On an ₱18.82M unit, that's roughly ₱1.5M in savings.</p>
+        <p>Terms can be customized — shorter DP periods, lump sum + monthly combos, or flexible spot payments. Designed for salaried professionals, business owners, and OFW investors alike.</p>
+      </div></div></div>
+
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">06</span><span class="faq-q-text">Why is it priced higher than other Cebu condos?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag emotional">Value Justification</span>
+        <p>Most Cebu condos price at ₱140K–₱200K/sqm. Shang Bauhinia is at ₱290K–₱430K/sqm. The premium reflects tangible differences:</p>
+        <p><strong>100% residential backup power.</strong> Most condos only power common areas during brownouts. At Shang Bauhinia, power continues seamlessly in every unit. Cebu's peak demand has exceeded capacity — this commands a ₱3K–₱5K/month rental premium alone.</p>
+        <p><strong>Building-wide water softener.</strong> Cebu's hard water destroys appliances within 3–5 years. This system eliminates ₱100K–₱300K in preventable damage over a decade.</p>
+        <p><strong>SPMSI property management</strong> — Shang's own subsidiary operating at Shangri-La hospitality standards, not an outsourced lowest-bidder.</p>
+        <p><strong>Fully finished turnover.</strong> No ₱200K–₱800K renovation needed before you can rent or move in.</p>
+        <a href="https://spibyronnel.setmore.com" target="_blank" class="faq-inline-cta">See the Quality Firsthand →</a>
+      </div></div></div>
+
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">07</span><span class="faq-q-text">What amenities does the project include?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag brand">Lifestyle</span>
+        <p><strong>5,120 sqm of dedicated amenity space</strong> across two tiers:</p>
+        <p><strong>The Clubhouse (4,015 sqm — all residents):</strong> Tropical pool with jacuzzi and kids' splash area, 345 sqm gym with yoga/Pilates studio, function rooms, business lounge, children's playroom, and garden areas.</p>
+        <p><strong>The Sky Lounge (1,105 sqm — Signature & Penthouse only):</strong> A private elevated amenity with panoramic views. Reserved exclusively for 2BR Signature, 3BR Signature, and Penthouse owners — roughly 10% of the building.</p>
+        <p>All amenities maintained by SPMSI to Shangri-La hospitality standards.</p>
+      </div></div></div>
+
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">08</span><span class="faq-q-text">When is the turnover date?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag brand">Timeline</span>
+        <p>Target turnover: <strong>December 31, 2031</strong>. DHSUD License to Sell No. 0002155, issued October 7, 2024.</p>
+        <p>Shang Properties has completed every project on schedule since 2002. Their institutional funding structure means construction doesn't depend on buyer deposit collections — the primary cause of delays with other developers. Pre-selling now locks in 2025/2026 pricing for a 2031 asset.</p>
+      </div></div></div>
+
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">09</span><span class="faq-q-text">What rental income or appreciation can I expect?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Investment Returns</span>
+        <p>Shang Properties' completed projects have appreciated <strong>129%–322% total</strong> (13–23% annually). While past results don't guarantee future performance, the track record is the strongest in Philippine luxury residential.</p>
+        <p>Cebu's luxury segment commands 5–8% gross yields. Target rental estimates: Studios ₱25K–35K/month, 1-Bedrooms ₱50K–70K/month, 2-Bedrooms ₱80K–120K/month. Shang Bauhinia's backup power and fully finished delivery provide measurable rental premiums over competitors.</p>
+      </div></div></div>
+
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">10</span><span class="faq-q-text">Who manages the property after turnover?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag brand">Management</span>
+        <p><strong>Shang Property Management Services Inc. (SPMSI)</strong> — Shang's own 100% subsidiary — manages all residential, retail, and common areas at hospitality-grade standards associated with Shangri-La Hotels.</p>
+        <p>Most developers outsource to the cheapest provider, and quality deteriorates within 5 years. SPMSI applies consistent standards from staff training to facilities maintenance. For investors who won't be on-site, this means your asset is protected by the same entity that built it.</p>
+      </div></div></div>
+
+    </div>
+  </div>
+</section>
+
+<div class="mid-cta">
+  <div class="mid-cta-inner">
+    <h3>Still Have Questions? Let's Talk in Person.</h3>
+    <p>Every buyer's situation is different. A private consultation lets us walk through your goals, timeline, and budget — then match you with the right unit and payment structure. No pressure, just clarity.</p>
+    <a href="https://spibyronnel.setmore.com" target="_blank" class="btn-gold">Schedule a Free Consultation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg></a>
+  </div>
+</div>
+
+<!-- FAQ 2: CEBU MARKET -->
+<section class="faq-section" id="faq-cebu" style="background:#fff;">
+  <div class="section">
+    <div class="section-label">Cebu Market Intelligence</div>
+    <h2 class="section-title">Investing in Cebu Real Estate</h2>
+    <p class="section-desc">Why Cebu is one of the strongest real estate markets in the Philippines — and what smart buyers need to understand.</p>
+    <div class="faq-grid">
+
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">01</span><span class="faq-q-text">Why is Cebu considered a strong real estate market?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag location">Market Fundamentals</span>
+        <p>Cebu is the Philippines' fastest-growing metro outside Manila, driven by a <strong>booming IT-BPO sector</strong> (150,000+ professionals), a tourism industry attracting millions annually, and major infrastructure investments including CCLEX and airport expansions.</p>
+        <p>The luxury segment is undersupplied relative to demand. Central Visayas consistently ranks among the top regional economies, with GDP growth rates outpacing the national average. The combination of strong employment, rising incomes, and limited luxury inventory creates conditions for sustained appreciation.</p>
+      </div></div></div>
+
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">02</span><span class="faq-q-text">How does Cebu IT Park affect nearby property values?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag location">Location Economics</span>
+        <p>Cebu IT Park is the city's primary BPO hub, operating <strong>24/7</strong>. This creates constant rental demand from professionals who value proximity — especially those on night shifts. Properties within walking distance consistently command higher rents and lower vacancy.</p>
+        <p>Shang Bauhinia is just 300 meters (3-minute walk) from IT Park — one of the closest premium residential options. For investors, this means a built-in tenant pool of well-compensated professionals who prioritize convenience.</p>
+      </div></div></div>
+
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">03</span><span class="faq-q-text">Is now a good time to buy pre-selling in Cebu?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Market Timing</span>
+        <p>Pre-selling offers the <strong>lowest possible entry price</strong> in any project's lifecycle. As construction progresses, prices typically increase through periodic escalation — making each month of delay more expensive.</p>
+        <p>Current Cebu conditions favor buyers: infrastructure development is increasing area values, IT-BPO continues expanding, and luxury supply remains limited. The question isn't whether prices will be higher at turnover — it's how much higher.</p>
+        <a href="https://spibyronnel.setmore.com" target="_blank" class="faq-inline-cta">Discuss Timing with a Specialist →</a>
+      </div></div></div>
+
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">04</span><span class="faq-q-text">What infrastructure developments are planned for Cebu?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag location">Growth Drivers</span>
+        <p>The <strong>Cebu-Cordova Link Expressway (CCLEX)</strong> has improved Cebu City–Mactan access. Road widening along Governor Cuenco Avenue is improving flow near the business districts. The Mactan-Cebu International Airport expansion supports growing passenger volumes.</p>
+        <p>Additional BPO campuses and mixed-use developments are expanding the economic footprint around IT Park and Cebu Business Park. Each project increases accessibility, economic activity, and property demand in surrounding areas.</p>
+      </div></div></div>
+
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">05</span><span class="faq-q-text">How does Cebu compare to Manila for investment?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Comparative Analysis</span>
+        <p>Manila luxury pricing reaches ₱500K–₱700K/sqm in BGC and Makati. Cebu's luxury pricing (₱290K–₱430K/sqm for SBR) represents a <strong>significantly lower entry point with higher growth potential</strong>.</p>
+        <p>Cebu offers faster economic growth, less luxury market saturation, stronger tourism fundamentals, and a lower cost of living. Shang Properties' decision to make Cebu their first regional expansion — after 20+ years exclusively in Metro Manila — speaks to their assessment of the market's long-term potential.</p>
+      </div></div></div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ 3: GENERAL PH REAL ESTATE -->
+<section class="faq-section" id="faq-general">
+  <div class="section">
+    <div class="section-label">Philippine Real Estate Essentials</div>
+    <h2 class="section-title">Buyer's Guide</h2>
+    <p class="section-desc">Essential knowledge for first-time and experienced property buyers in the Philippines.</p>
+    <div class="faq-grid">
+
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">01</span><span class="faq-q-text">Can foreigners or dual citizens own property in the Philippines?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Ownership Rules</span>
+        <p>Filipino citizens and dual citizens can own land without restrictions. Foreign nationals cannot own land directly, but they <strong>can buy condominium units</strong> as long as total foreign ownership stays below 40% per building.</p>
+        <p>For land access, foreigners may use long-term leases — now up to <strong>99 years under RA 12252 (2025)</strong> — or set up a Filipino-majority corporation. At Shang Bauhinia, foreign buyers are welcome within the 40% cap.</p>
+      </div></div></div>
+
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">02</span><span class="faq-q-text">How do I verify if a developer and project are legitimate?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag emotional">Trust & Safety</span>
+        <p>Check the <strong>DHSUD License to Sell (LTS)</strong> and Certificate of Registration online. Review the title for liens, confirm tax clearances, and research the developer's completed projects. <strong>Red flags:</strong> no escrow account, unexplained delays, unapproved zoning.</p>
+        <p>For reference, Shang Bauhinia holds DHSUD LTS No. 0002155 (Oct 7, 2024). Shang Properties is PSE-listed with full quarterly public reporting.</p>
+      </div></div></div>
+
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">03</span><span class="faq-q-text">What are the bank loan requirements?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Financing</span>
+        <p>Stable income, ages 21–70, clean credit. Banks require <strong>20–40% down payment</strong> and finance 60–80% LTV. Submit IDs, income proof (payslips/ITR), and developer's Contract to Sell. Approval: 1–2 months. Pag-IBIG offers up to 95% LTV for Filipino citizens.</p>
+        <p>Shang Properties has accredited partner banks including BDO, BPI, and Metrobank for streamlined processing.</p>
+      </div></div></div>
+
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">04</span><span class="faq-q-text">Pre-selling vs. ready-for-occupancy — which should I choose?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Strategy</span>
+        <p><strong>Pre-selling:</strong> Lower entry prices, staggered payments over 24–48 months, potential for significant appreciation. Trade-off: multi-year wait — though risk is mitigated with a developer that has a perfect completion record.</p>
+        <p><strong>RFO:</strong> Immediate move-in or rental income, but at higher pricing with no construction-period equity growth. Choose pre-selling for value optimization; RFO for immediate use.</p>
+      </div></div></div>
+
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">05</span><span class="faq-q-text">What taxes and fees will I pay at closing?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Taxes & Costs</span>
+        <p>Expect <strong>3–5% of sale price</strong> in closing costs: 1.5% DST, 0.5–0.75% transfer tax, ~1% registration fees (calculated on sale price or zonal value, whichever is higher). Seller covers the 6% CGT or VAT. Prepare a closing cost estimate early to avoid surprises.</p>
+      </div></div></div>
+
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">06</span><span class="faq-q-text">How does reservation work? Can I cancel?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag emotional">Commitment & Protection</span>
+        <p>Reservation fees range from <strong>₱10,000–₱50,000</strong> (often non-refundable) to hold your unit, followed by 10–20% down payment in monthly installments. Cancellation may forfeit 10–25% of payments made. Always review grace period and cancellation clauses in your Contract to Sell. Developers are required to maintain escrow accounts.</p>
+      </div></div></div>
+
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">07</span><span class="faq-q-text">What rights do condominium owners have?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Ownership Rights</span>
+        <p><strong>Exclusive unit ownership</strong> plus shared ownership of common areas. You vote on building rules through the condo corporation. Monthly dues cover maintenance, security, and amenities. There is <strong>no 50-year expiry</strong> — this is a common myth. Ownership continues as long as the building stands.</p>
+      </div></div></div>
+
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">08</span><span class="faq-q-text">What investment returns are realistic?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Investment</span>
+        <p>Philippine rental yields: <strong>5–6% annually</strong> in prime locations. Appreciation: 5–7% per year in metros like Cebu and Manila. Net returns calculated after taxes, dues, and maintenance. Pre-selling properties in high-demand areas with established developers tend to offer the best appreciation during construction.</p>
+      </div></div></div>
+
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">09</span><span class="faq-q-text">What are current market trends?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Market Outlook</span>
+        <p>Cebu's <strong>IT-BPO sector and tourism</strong> continue driving demand. Urban rental demand is climbing with infrastructure expansion. BGC condos have appreciated 5–7% annually. Cebu's luxury segment is particularly strong with limited supply driving premium pricing. Emerging areas: Davao and Clark, where infra investments create new demand.</p>
+      </div></div></div>
+
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">10</span><span class="faq-q-text">Any recent law changes affecting buyers?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Legal Updates</span>
+        <p><strong>RA 12252 (2025)</strong> extends foreign lease terms from 50 to 99 years — major improvement for foreign investor security. <strong>RA 12001</strong> reforms real property valuation for fairer tax assessments. Both signal continued government support for the sector.</p>
+      </div></div></div>
+
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <h2>Ready to Make Your Move?</h2>
+  <p>Book a private show suite visit, explore the full project details, or connect directly. The best time to act on pre-selling pricing is before the next escalation.</p>
+  <div class="cta-links">
+    <a href="https://spibyronnel.setmore.com" target="_blank" class="cta-link primary">Book a Site Visit</a>
+    <a href="https://sbr-overview.ronnelestrada.com/" target="_blank" class="cta-link secondary">View Project Overview</a>
+    <a href="https://ronnelestrada.com/" target="_blank" class="cta-link tertiary">Contact Ronnel Estrada</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>&copy; 2026 Ronnel Estrada &middot; Property Specialist II &middot; <a href="https://ronnelestrada.com/" target="_blank">Shang Properties, Inc.</a></p>
+  <p style="margin-top:6px;">This tool is for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to buy real property.</p>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
+const unitData = {
+  'studio': { price: 10890000, sqm: 35.33 }, '1br-small': { price: 17370000, sqm: 50.45 },
+  '1br-mid': { price: 18820000, sqm: 56.83 }, '1br-large': { price: 23540000, sqm: 64.12 },
+  '2br-typical': { price: 30450000, sqm: 95.02 }, '2br-large': { price: 35560000, sqm: 103.51 },
+  '2br-sig': { price: 45500000, sqm: 127.39 }, '3br-sig': { price: 74800000, sqm: 186.68 }
+};
+document.getElementById('unitType').addEventListener('change', function() {
+  document.getElementById('currentPrice').value = unitData[this.value].price;
+});
+function setupRange(id, displayId, suffix, formatter) {
+  const el = document.getElementById(id), display = document.getElementById(displayId);
+  function update() {
+    const min = parseFloat(el.min), max = parseFloat(el.max), val = parseFloat(el.value);
+    el.style.setProperty('--fill', ((val - min) / (max - min)) * 100 + '%');
+    display.textContent = formatter ? formatter(val) : val + suffix;
+  }
+  el.addEventListener('input', update); update();
+}
+setupRange('escalation', 'escDisplay', '%');
+setupRange('delayMonths', 'delayDisplay', '', v => v + (v === 1 ? ' month' : ' months'));
+setupRange('bankRate', 'bankDisplay', '%');
+function formatPeso(n) { return n >= 1e6 ? '₱' + (n/1e6).toFixed(2) + 'M' : n >= 1e3 ? '₱' + (n/1e3).toFixed(0) + 'K' : '₱' + n.toLocaleString(); }
+function formatPesoFull(n) { return '₱' + Math.round(n).toLocaleString(); }
+function calculate() {
+  const price = parseFloat(document.getElementById('currentPrice').value);
+  const escAnnual = parseFloat(document.getElementById('escalation').value) / 100;
+  const months = parseInt(document.getElementById('delayMonths').value);
+  const bankAnnual = parseFloat(document.getElementById('bankRate').value) / 100;
+  const unit = unitData[document.getElementById('unitType').value];
+  const monthlyEsc = Math.pow(1 + escAnnual, 1/12) - 1;
+  const futurePrice = price * Math.pow(1 + monthlyEsc, months);
+  const priceIncrease = futurePrice - price;
+  const costPerMonth = priceIncrease / months;
+  const equityGained = priceIncrease;
+  const downPayment = price * 0.20;
+  const bankEarnings = downPayment * (bankAnnual / 12) * months;
+  const opportunityCost = priceIncrease - bankEarnings;
+  const sqmIncrease = priceIncrease / unit.sqm;
+  const resultsDiv = document.getElementById('results');
+  document.getElementById('placeholder').style.display = 'none';
+  resultsDiv.style.display = 'block';
+  const investPct = Math.round((equityGained / (equityGained + bankEarnings)) * 100);
+  const bankPct = 100 - investPct;
+  resultsDiv.innerHTML = `
+    <h3 class="calc-panel-title">Your ${months}-Month Delay Costs</h3>
+    <div class="result-card loss"><div class="result-label">Price Increase After ${months} Months</div><div class="result-number">+${formatPeso(priceIncrease)}</div><div class="result-note">Unit rises from ${formatPeso(price)} to ${formatPeso(futurePrice)}</div></div>
+    <div class="result-card loss"><div class="result-label">Cost Per Month of Delay</div><div class="result-number">${formatPesoFull(costPerMonth)}/mo</div><div class="result-note">+${formatPesoFull(sqmIncrease)}/sqm more for the same ${unit.sqm} sqm unit</div></div>
+    <div class="result-card gain"><div class="result-label">Equity Built If You Act Today</div><div class="result-number">+${formatPeso(equityGained)}</div><div class="result-note">Paper appreciation during the same ${months}-month period</div></div>
+    <div class="result-card neutral"><div class="result-label">Bank Alternative (20% DP at ${(bankAnnual*100).toFixed(1)}%)</div><div class="result-number">${formatPeso(bankEarnings)}</div><div class="result-note">${formatPeso(downPayment)} DP earns this in a savings account</div></div>
+    <div class="comparison-bar-section"><div class="comparison-label">Equity Gained vs. Bank Interest</div><div class="bar-container"><div class="bar-segment bar-invest" style="width:${investPct}%">${investPct > 15 ? formatPeso(equityGained) : ''}</div><div class="bar-segment bar-lost" style="width:${bankPct}%">${bankPct > 15 ? formatPeso(bankEarnings) : ''}</div></div><div class="bar-legend"><span class="leg-invest">Pre-selling equity</span><span class="leg-lost">Bank interest</span></div></div>
+    <div class="insight-box" style="margin-top:20px"><div class="insight-icon">💡</div><h4>The Bottom Line</h4><p>Waiting ${months} month${months>1?'s':''} costs you <strong>${formatPeso(opportunityCost)} more</strong> than what your money would earn in the bank. Every month you act earlier puts <strong>${formatPesoFull(costPerMonth)}</strong> of value on your side.</p><p style="margin-top:12px"><a href="https://spibyronnel.setmore.com" target="_blank">Book a private consultation</a> to find the best unit for your goals.</p></div>`;
+  if (window.innerWidth < 769) resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function toggleFaq(btn) {
+  const item = btn.parentElement, wasOpen = item.classList.contains('open');
+  item.closest('.faq-grid').querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.style.animationPlayState = 'running'; });
+}, { threshold: 0.1 });
+document.querySelectorAll('.animate-in').forEach(el => { el.style.animationPlayState = 'paused'; observer.observe(el); });
+</script>
+</body>
+</html>

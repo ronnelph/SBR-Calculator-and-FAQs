@@ -179,7 +179,50 @@ input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
   .hero-buttons { flex-direction: column; align-items: center; }
   .mid-cta { padding: 48px 20px; }
 }
+
+/* === RENTAL YIELD CALCULATOR === */
+.yield-section { background: #fff; border-top: 1px solid var(--border); }
+.yield-wrapper { margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+@media (max-width: 768px) { .yield-wrapper { grid-template-columns: 1fr; } }
+.yield-results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+@media (max-width: 480px) { .yield-results-grid { grid-template-columns: 1fr; } }
+.yield-card { padding: 20px; border-radius: 10px; }
+.yield-card .result-label { font-size: 0.68rem; }
+.yield-card .result-number { font-size: 1.4rem; }
+.year-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 0.82rem; }
+.year-table th { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+.year-table td { padding: 10px 12px; border-bottom: 1px solid rgba(0,0,0,0.04); color: var(--ink); }
+.year-table tr:last-child td { border-bottom: 2px solid var(--gold); font-weight: 600; }
+.year-table .positive { color: var(--accent-green); font-weight: 600; }
+.total-row { background: var(--gold-muted); }
+.total-row td { font-weight: 700 !important; color: var(--gold) !important; }
+.yield-summary-box { background: linear-gradient(135deg, #f0f7f2, #f5faf6); border: 1px solid rgba(74,140,92,0.15); border-radius: 10px; padding: 20px; margin-top: 16px; }
+.yield-summary-box h4 { font-family: var(--serif); font-size: 1rem; font-weight: 700; color: var(--accent-green); margin-bottom: 6px; }
+.yield-summary-box p { font-size: 0.85rem; color: #555; line-height: 1.6; }
+.yield-summary-box strong { color: var(--accent-green); }
+.tab-switcher { display: flex; gap: 4px; background: var(--warm-white); border-radius: 8px; padding: 4px; margin-bottom: 32px; }
+.tab-btn { flex: 1; padding: 10px 16px; border: none; background: transparent; font-family: var(--sans); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); border-radius: 6px; cursor: pointer; transition: all 0.25s; }
+.tab-btn.active { background: #fff; color: var(--ink); box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+.calc-section-wrap { display: none; }
+.calc-section-wrap.active { display: block; }
 </style>
+
+<!-- Facebook Pixel -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1474546497428016');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1474546497428016&ev=PageView&noscript=1"/></noscript>
+<!-- End Facebook Pixel -->
+
 </head>
 <body>
 
@@ -188,6 +231,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
     <div class="nav-brand">Shang <span>Bauhinia</span></div>
     <div class="nav-links">
       <a href="#calculator">Calculator</a>
+      <a href="#yield-calc" class="hide-mobile">Yield</a>
       <a href="#faq-sbr" class="hide-mobile">FAQ</a>
       <a href="https://sbr-overview.ronnelestrada.com/" target="_blank" class="hide-mobile">Overview</a>
       <a href="https://spibyronnel.setmore.com" target="_blank" class="nav-cta">Book a Visit</a>
@@ -242,6 +286,46 @@ input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
 
 <div class="disclaimer-bar"><p>Disclaimer: This calculator provides estimates based on user-defined assumptions and does not constitute financial advice. Actual price changes depend on market conditions, developer pricing decisions, and economic factors. Past appreciation rates do not guarantee future performance. Consult a licensed financial professional before making investment decisions.</p></div>
 
+<!-- RENTAL YIELD & APPRECIATION CALCULATOR -->
+<section class="yield-section" id="yield-calc">
+  <div class="section">
+    <div class="section-label">Return Projection</div>
+    <h2 class="section-title">Rental Yield & Appreciation</h2>
+    <p class="section-desc">Project your potential rental income, gross and net yields, and total investment return over your chosen holding period.</p>
+    <div class="yield-wrapper">
+      <div class="calc-panel">
+        <h3 class="calc-panel-title">Investment Assumptions</h3>
+        <div class="field"><label>Unit Type</label>
+          <select id="yieldUnit">
+            <option value="studio">Studio — 35.33 sqm</option>
+            <option value="1br-small">1 Bedroom — 50.45 sqm</option>
+            <option value="1br-mid" selected>1 Bedroom — 56.83 sqm</option>
+            <option value="1br-large">1 Bedroom — 64.12 sqm</option>
+            <option value="2br-typical">2 Bedroom Typical — 95.02 sqm</option>
+            <option value="2br-large">2 Bedroom Typical — 103.51 sqm</option>
+            <option value="2br-sig">2 Bedroom Signature — 127.39 sqm</option>
+            <option value="3br-sig">3 Bedroom Signature — 186.68 sqm</option>
+          </select>
+        </div>
+        <div class="field"><label>Purchase Price (₱)</label><input type="number" id="yieldPrice" value="18820000" min="1000000" step="100000"></div>
+        <div class="field"><label>Expected Monthly Rent (₱)</label><input type="number" id="monthlyRent" value="60000" min="10000" step="5000"></div>
+        <div class="range-field"><div class="range-header"><label>Annual Appreciation Rate</label><span class="range-value" id="appDisplay">8%</span></div><input type="range" id="appRate" min="3" max="20" value="8" step="0.5"></div>
+        <div class="range-field"><div class="range-header"><label>Monthly Assoc. Dues (₱/sqm)</label><span class="range-value" id="duesDisplay">₱120/sqm</span></div><input type="range" id="duesRate" min="60" max="200" value="120" step="10"></div>
+        <div class="range-field"><div class="range-header"><label>Holding Period</label><span class="range-value" id="holdDisplay">5 years</span></div><input type="range" id="holdYears" min="1" max="15" value="5"></div>
+        <div class="range-field"><div class="range-header"><label>Occupancy Rate</label><span class="range-value" id="occDisplay">90%</span></div><input type="range" id="occRate" min="50" max="100" value="90" step="5"></div>
+        <button class="calc-btn" onclick="calcYield()">Calculate Returns</button>
+      </div>
+      <div class="calc-panel results-panel" id="yieldResultsPanel">
+        <div class="results-placeholder" id="yieldPlaceholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+          <p>Set your assumptions and tap <strong>Calculate Returns</strong> to see projected rental yields and appreciation.</p>
+        </div>
+        <div id="yieldResults" style="display:none;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="mid-cta">
   <div class="mid-cta-inner">
     <h3>Numbers Tell a Story. The Show Suite Tells the Whole Story.</h3>
@@ -260,7 +344,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
 
       <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">01</span><span class="faq-q-text">Who is Shang Properties and why should I trust them?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
       <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag brand">Developer Credibility</span>
-        <p>Shang Properties, Inc. has been <strong>listed on the Philippine Stock Exchange (PSE) since 1991</strong> — over three decades of public accountability and quarterly financial reporting. They are part of The Kuok Group (Malaysia), with over ₱92+ billion in managed assets, and affiliated with Shangri-La Hotels & Resorts and Kerry Properties Limited.</p>
+        <p>Shang Properties, Inc. has been <strong>listed on the Philippine Stock Exchange (PSE) since 1991</strong> — over three decades of public accountability and quarterly financial reporting. They are part of The Kuok Group (Malaysia), with over ₱50 billion in managed assets, and affiliated with Shangri-La Hotels & Resorts and Kerry Properties Limited.</p>
         <p>Since entering residential development in 2002, they have completed every project on schedule. Their portfolio — St. Francis Shangri-La Place, The Rise Makati, Horizon Homes BGC, Shang Salcedo Place, and more — has delivered <strong>129% to 322% total appreciation</strong>. That's verifiable public record, not marketing language.</p>
         <p>Unlike many developers that rely on pre-selling deposits to fund construction, Shang Properties has institutional backing. Your building gets built regardless of sales velocity.</p>
       </div></div></div>
@@ -526,7 +610,133 @@ function calculate() {
     <div class="comparison-bar-section"><div class="comparison-label">Equity Gained vs. Bank Interest</div><div class="bar-container"><div class="bar-segment bar-invest" style="width:${investPct}%">${investPct > 15 ? formatPeso(equityGained) : ''}</div><div class="bar-segment bar-lost" style="width:${bankPct}%">${bankPct > 15 ? formatPeso(bankEarnings) : ''}</div></div><div class="bar-legend"><span class="leg-invest">Pre-selling equity</span><span class="leg-lost">Bank interest</span></div></div>
     <div class="insight-box" style="margin-top:20px"><div class="insight-icon">💡</div><h4>The Bottom Line</h4><p>Waiting ${months} month${months>1?'s':''} costs you <strong>${formatPeso(opportunityCost)} more</strong> than what your money would earn in the bank. Every month you act earlier puts <strong>${formatPesoFull(costPerMonth)}</strong> of value on your side.</p><p style="margin-top:12px"><a href="https://spibyronnel.setmore.com" target="_blank">Book a private consultation</a> to find the best unit for your goals.</p></div>`;
   if (window.innerWidth < 769) resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // FB Pixel: Track Cost of Waiting calculation
+  if(typeof fbq==='function') fbq('trackCustom','CostOfWaitingCalc',{unit:document.getElementById('unitType').value,price:price,months:months});
 }
+
+// === RENTAL YIELD & APPRECIATION CALCULATOR ===
+const yieldUnitData = {
+  'studio':     { price: 10890000, sqm: 35.33, rent: 30000 },
+  '1br-small':  { price: 17370000, sqm: 50.45, rent: 50000 },
+  '1br-mid':    { price: 18820000, sqm: 56.83, rent: 60000 },
+  '1br-large':  { price: 23540000, sqm: 64.12, rent: 65000 },
+  '2br-typical':{ price: 30450000, sqm: 95.02, rent: 85000 },
+  '2br-large':  { price: 35560000, sqm: 103.51, rent: 95000 },
+  '2br-sig':    { price: 45500000, sqm: 127.39, rent: 110000 },
+  '3br-sig':    { price: 74800000, sqm: 186.68, rent: 150000 }
+};
+
+document.getElementById('yieldUnit').addEventListener('change', function() {
+  const d = yieldUnitData[this.value];
+  document.getElementById('yieldPrice').value = d.price;
+  document.getElementById('monthlyRent').value = d.rent;
+});
+
+setupRange('appRate', 'appDisplay', '%');
+setupRange('duesRate', 'duesDisplay', '', v => '₱' + v + '/sqm');
+setupRange('holdYears', 'holdDisplay', '', v => v + (v == 1 ? ' year' : ' years'));
+setupRange('occRate', 'occDisplay', '%');
+
+function calcYield() {
+  const unitKey = document.getElementById('yieldUnit').value;
+  const unit = yieldUnitData[unitKey];
+  const price = parseFloat(document.getElementById('yieldPrice').value);
+  const monthlyRent = parseFloat(document.getElementById('monthlyRent').value);
+  const appRate = parseFloat(document.getElementById('appRate').value) / 100;
+  const duesPerSqm = parseFloat(document.getElementById('duesRate').value);
+  const holdYears = parseInt(document.getElementById('holdYears').value);
+  const occRate = parseFloat(document.getElementById('occRate').value) / 100;
+
+  const monthlyDues = duesPerSqm * unit.sqm;
+  const annualRentGross = monthlyRent * 12 * occRate;
+  const annualDues = monthlyDues * 12;
+  const annualRPT = price * 0.005; // ~0.5% estimate
+  const annualNetRent = annualRentGross - annualDues - annualRPT;
+  const grossYield = (annualRentGross / price) * 100;
+  const netYield = (annualNetRent / price) * 100;
+
+  // Year-by-year projection
+  let rows = '';
+  let totalRent = 0, totalAppreciation = 0;
+  let propValue = price;
+  for (let y = 1; y <= holdYears; y++) {
+    const prevValue = propValue;
+    propValue = propValue * (1 + appRate);
+    const yearAppreciation = propValue - prevValue;
+    const yearRent = annualNetRent;
+    totalRent += yearRent;
+    totalAppreciation += yearAppreciation;
+    const totalReturn = totalRent + (propValue - price);
+    rows += `<tr>
+      <td>Year ${y}</td>
+      <td>${formatPeso(propValue)}</td>
+      <td class="positive">+${formatPeso(yearAppreciation)}</td>
+      <td>${formatPeso(yearRent)}</td>
+      <td class="positive">${formatPeso(totalReturn)}</td>
+    </tr>`;
+  }
+  // Total row
+  const totalReturn = totalRent + (propValue - price);
+  const totalROI = ((totalReturn) / price * 100).toFixed(1);
+  rows += `<tr class="total-row">
+    <td>Total</td>
+    <td>${formatPeso(propValue)}</td>
+    <td class="positive">+${formatPeso(propValue - price)}</td>
+    <td>${formatPeso(totalRent)}</td>
+    <td class="positive">${formatPeso(totalReturn)}</td>
+  </tr>`;
+
+  const resultsDiv = document.getElementById('yieldResults');
+  document.getElementById('yieldPlaceholder').style.display = 'none';
+  resultsDiv.style.display = 'block';
+
+  resultsDiv.innerHTML = `
+    <h3 class="calc-panel-title">${holdYears}-Year Investment Projection</h3>
+    <div class="yield-results-grid">
+      <div class="yield-card result-card gain"><div class="result-label">Gross Rental Yield</div><div class="result-number">${grossYield.toFixed(1)}%</div><div class="result-note">${formatPesoFull(annualRentGross)}/year at ${(occRate*100).toFixed(0)}% occupancy</div></div>
+      <div class="yield-card result-card ${netYield > 0 ? 'gain' : 'loss'}"><div class="result-label">Net Rental Yield</div><div class="result-number">${netYield.toFixed(1)}%</div><div class="result-note">After dues (${formatPesoFull(annualDues)}) + RPT (${formatPesoFull(annualRPT)})</div></div>
+      <div class="yield-card result-card neutral"><div class="result-label">Projected Value (Year ${holdYears})</div><div class="result-number">${formatPeso(propValue)}</div><div class="result-note">From ${formatPeso(price)} at ${(appRate*100).toFixed(1)}%/year</div></div>
+      <div class="yield-card result-card gain"><div class="result-label">Total ROI (${holdYears} Years)</div><div class="result-number">${totalROI}%</div><div class="result-note">Appreciation + net rental income combined</div></div>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="year-table">
+        <thead><tr><th>Period</th><th>Property Value</th><th>Appreciation</th><th>Net Rent</th><th>Cumulative Return</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
+    <div class="yield-summary-box">
+      <h4>Investment Summary</h4>
+      <p>Over ${holdYears} years, a ${formatPeso(price)} investment in Shang Bauhinia could generate <strong>${formatPeso(totalRent)}</strong> in net rental income plus <strong>${formatPeso(propValue - price)}</strong> in capital appreciation — a combined return of <strong>${formatPeso(totalReturn)} (${totalROI}% ROI)</strong>. That's the power of locking in pre-selling pricing today.</p>
+      <a href="https://spibyronnel.setmore.com" target="_blank" class="faq-inline-cta" style="margin-top:16px;" onclick="trackBooking('yield_calculator')">Find the Right Unit for Your Goals →</a>
+    </div>`;
+
+  if (window.innerWidth < 769) resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // FB Pixel: Track Yield calculation
+  if(typeof fbq==='function') fbq('trackCustom','YieldCalcComplete',{unit:unitKey,price:price,grossYield:grossYield.toFixed(1),netYield:netYield.toFixed(1),holdYears:holdYears,totalROI:totalROI});
+}
+
+// === FB PIXEL EVENT TRACKING ===
+function trackBooking(source) {
+  if(typeof fbq==='function') fbq('track','Schedule',{content_name:'SBR Site Visit',source:source});
+}
+// Track all Setmore booking link clicks
+document.addEventListener('click', function(e) {
+  const link = e.target.closest('a[href*="setmore.com"]');
+  if (link) {
+    if(typeof fbq==='function') fbq('track','Schedule',{content_name:'SBR Site Visit',source:link.closest('.mid-cta')?'mid_cta':link.closest('.cta-banner')?'footer_cta':link.closest('.nav')?'nav':'inline'});
+  }
+  // Track overview link clicks
+  const overviewLink = e.target.closest('a[href*="sbr-overview"]');
+  if (overviewLink) {
+    if(typeof fbq==='function') fbq('track','ViewContent',{content_name:'SBR Overview',content_type:'product'});
+  }
+  // Track portfolio link clicks
+  const portfolioLink = e.target.closest('a[href*="ronnelestrada.com"]');
+  if (portfolioLink && !portfolioLink.href.includes('sbr-overview') && !portfolioLink.href.includes('setmore')) {
+    if(typeof fbq==='function') fbq('track','Contact',{content_name:'Ronnel Portfolio'});
+  }
+});
+
 function toggleFaq(btn) {
   const item = btn.parentElement, wasOpen = item.classList.contains('open');
   item.closest('.faq-grid').querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));

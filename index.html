@@ -178,6 +178,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
   .disclaimer-bar { padding: 0 20px 32px; }
   .hero-buttons { flex-direction: column; align-items: center; }
   .mid-cta { padding: 48px 20px; }
+  .date-row { flex-direction: column; }
 }
 
 /* === RENTAL YIELD CALCULATOR === */
@@ -189,22 +190,25 @@ input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
 .yield-card { padding: 20px; border-radius: 10px; }
 .yield-card .result-label { font-size: 0.68rem; }
 .yield-card .result-number { font-size: 1.4rem; }
-.year-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 0.82rem; }
-.year-table th { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 10px 12px; border-bottom: 2px solid var(--border); }
-.year-table td { padding: 10px 12px; border-bottom: 1px solid rgba(0,0,0,0.04); color: var(--ink); }
-.year-table tr:last-child td { border-bottom: 2px solid var(--gold); font-weight: 600; }
+.year-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 0.8rem; }
+.year-table th { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 10px 8px; border-bottom: 2px solid var(--border); }
+.year-table td { padding: 10px 8px; border-bottom: 1px solid rgba(0,0,0,0.04); color: var(--ink); }
 .year-table .positive { color: var(--accent-green); font-weight: 600; }
+.year-table .dimmed { color: var(--muted); font-style: italic; font-size: 0.78rem; }
 .total-row { background: var(--gold-muted); }
-.total-row td { font-weight: 700 !important; color: var(--gold) !important; }
+.total-row td { font-weight: 700 !important; color: var(--gold) !important; border-bottom: 2px solid var(--gold) !important; }
 .yield-summary-box { background: linear-gradient(135deg, #f0f7f2, #f5faf6); border: 1px solid rgba(74,140,92,0.15); border-radius: 10px; padding: 20px; margin-top: 16px; }
 .yield-summary-box h4 { font-family: var(--serif); font-size: 1rem; font-weight: 700; color: var(--accent-green); margin-bottom: 6px; }
 .yield-summary-box p { font-size: 0.85rem; color: #555; line-height: 1.6; }
 .yield-summary-box strong { color: var(--accent-green); }
-.tab-switcher { display: flex; gap: 4px; background: var(--warm-white); border-radius: 8px; padding: 4px; margin-bottom: 32px; }
-.tab-btn { flex: 1; padding: 10px 16px; border: none; background: transparent; font-family: var(--sans); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); border-radius: 6px; cursor: pointer; transition: all 0.25s; }
-.tab-btn.active { background: #fff; color: var(--ink); box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
-.calc-section-wrap { display: none; }
-.calc-section-wrap.active { display: block; }
+.phase-badge { display: inline-block; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; }
+.phase-badge.construction { background: rgba(184,148,74,0.15); color: var(--gold); }
+.phase-badge.rental { background: rgba(74,140,92,0.12); color: var(--accent-green); }
+.date-row { display: flex; gap: 12px; }
+.date-row .field { flex: 1; }
+.field-hint { font-size: 0.68rem; color: var(--muted); margin-top: 4px; font-style: italic; line-height: 1.4; }
+.phase-info { background: var(--gold-muted); border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; font-size: 0.82rem; color: var(--charcoal); line-height: 1.55; }
+.phase-info strong { color: var(--gold); }
 </style>
 
 <!-- Facebook Pixel -->
@@ -258,14 +262,14 @@ fbq('track', 'PageView');
       <h3 class="calc-panel-title">Your Investment Scenario</h3>
       <div class="field"><label>Unit Type</label>
         <select id="unitType">
-          <option value="studio">Studio — 35.33 sqm</option>
-          <option value="1br-small">1 Bedroom</option>
-          <option value="1br-mid" selected>1 Bedroom — 56.83 sqm</option>
-          <option value="1br-large">1 Bedroom — 64.12 sqm</option>
-          <option value="2br-typical">2 Bedroom Typical — 95.02 sqm</option>
-          <option value="2br-large">2 Bedroom Typical — 103.51 sqm</option>
-          <option value="2br-sig">2 Bedroom Signature — 124 sqm</option>
-          <option value="3br-sig">3 Bedroom Signature — 187.81</option>
+          <option value="studio">Studio — 35.33 sqm (from ₱10.89M)</option>
+          <option value="1br-small">1 Bedroom — 50.45 sqm (from ₱17.37M)</option>
+          <option value="1br-mid" selected>1 Bedroom — 56.83 sqm (from ₱18.82M)</option>
+          <option value="1br-large">1 Bedroom — 64.12 sqm (from ₱23.54M)</option>
+          <option value="2br-typical">2 Bedroom Typical — 95.02 sqm (from ₱30.45M)</option>
+          <option value="2br-large">2 Bedroom Typical — 103.51 sqm (from ₱35.56M)</option>
+          <option value="2br-sig">2 Bedroom Signature — 124 sqm (from ₱45.50M)</option>
+          <option value="3br-sig">3 Bedroom Signature — 187.81 sqm (from ₱74.80M)</option>
         </select>
       </div>
       <div class="field"><label>Current Pre-Selling Price (₱)</label><input type="number" id="currentPrice" value="18820000" min="1000000" step="100000"></div>
@@ -286,12 +290,12 @@ fbq('track', 'PageView');
 
 <div class="disclaimer-bar"><p>Disclaimer: This calculator provides estimates based on user-defined assumptions and does not constitute financial advice. Actual price changes depend on market conditions, developer pricing decisions, and economic factors. Past appreciation rates do not guarantee future performance. Consult a licensed financial professional before making investment decisions.</p></div>
 
-<!-- RENTAL YIELD & APPRECIATION CALCULATOR -->
+<!-- RENTAL YIELD & APPRECIATION CALCULATOR — TWO-PHASE MODEL -->
 <section class="yield-section" id="yield-calc">
   <div class="section">
     <div class="section-label">Return Projection</div>
     <h2 class="section-title">Rental Yield & Appreciation</h2>
-    <p class="section-desc">Project your potential rental income, gross and net yields, and total investment return over your chosen holding period.</p>
+    <p class="section-desc">Project your total investment return across both phases — capital appreciation during construction, then rental income after turnover.</p>
     <div class="yield-wrapper">
       <div class="calc-panel">
         <h3 class="calc-panel-title">Investment Assumptions</h3>
@@ -303,22 +307,52 @@ fbq('track', 'PageView');
             <option value="1br-large">1 Bedroom — 64.12 sqm</option>
             <option value="2br-typical">2 Bedroom Typical — 95.02 sqm</option>
             <option value="2br-large">2 Bedroom Typical — 103.51 sqm</option>
-            <option value="2br-sig">2 Bedroom Signature — 127.39 sqm</option>
-            <option value="3br-sig">3 Bedroom Signature — 186.68 sqm</option>
+            <option value="2br-sig">2 Bedroom Signature — 124 sqm</option>
+            <option value="3br-sig">3 Bedroom Signature — 187.81 sqm</option>
           </select>
         </div>
         <div class="field"><label>Purchase Price (₱)</label><input type="number" id="yieldPrice" value="18820000" min="1000000" step="100000"></div>
+
+        <div class="date-row">
+          <div class="field"><label>Purchase Date</label>
+            <select id="purchaseMonth">
+              <option value="0">January</option><option value="1">February</option><option value="2" selected>March</option><option value="3">April</option><option value="4">May</option><option value="5">June</option>
+              <option value="6">July</option><option value="7">August</option><option value="8">September</option><option value="9">October</option><option value="10">November</option><option value="11">December</option>
+            </select>
+          </div>
+          <div class="field"><label>&nbsp;</label>
+            <select id="purchaseYear">
+              <option value="2025">2025</option><option value="2026" selected>2026</option><option value="2027">2027</option><option value="2028">2028</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="date-row">
+          <div class="field"><label>Rental Start Date</label>
+            <select id="rentalMonth">
+              <option value="0" selected>January</option><option value="1">February</option><option value="2">March</option><option value="3">April</option><option value="4">May</option><option value="5">June</option>
+              <option value="6">July</option><option value="7">August</option><option value="8">September</option><option value="9">October</option><option value="10">November</option><option value="11">December</option>
+            </select>
+          </div>
+          <div class="field"><label>&nbsp;</label>
+            <select id="rentalYear">
+              <option value="2031">2031</option><option value="2032" selected>2032</option><option value="2033">2033</option><option value="2034">2034</option>
+            </select>
+            <div class="field-hint">After turnover (Dec 2031) + furnishing period</div>
+          </div>
+        </div>
+
         <div class="field"><label>Expected Monthly Rent (₱)</label><input type="number" id="monthlyRent" value="60000" min="10000" step="5000"></div>
         <div class="range-field"><div class="range-header"><label>Annual Appreciation Rate</label><span class="range-value" id="appDisplay">8%</span></div><input type="range" id="appRate" min="3" max="20" value="8" step="0.5"></div>
         <div class="range-field"><div class="range-header"><label>Monthly Assoc. Dues (₱/sqm)</label><span class="range-value" id="duesDisplay">₱120/sqm</span></div><input type="range" id="duesRate" min="60" max="200" value="120" step="10"></div>
-        <div class="range-field"><div class="range-header"><label>Holding Period</label><span class="range-value" id="holdDisplay">5 years</span></div><input type="range" id="holdYears" min="1" max="15" value="5"></div>
+        <div class="range-field"><div class="range-header"><label>Holding Period (from purchase)</label><span class="range-value" id="holdDisplay">10 years</span></div><input type="range" id="holdYears" min="5" max="20" value="10"></div>
         <div class="range-field"><div class="range-header"><label>Occupancy Rate</label><span class="range-value" id="occDisplay">90%</span></div><input type="range" id="occRate" min="50" max="100" value="90" step="5"></div>
         <button class="calc-btn" onclick="calcYield()">Calculate Returns</button>
       </div>
       <div class="calc-panel results-panel" id="yieldResultsPanel">
         <div class="results-placeholder" id="yieldPlaceholder">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-          <p>Set your assumptions and tap <strong>Calculate Returns</strong> to see projected rental yields and appreciation.</p>
+          <p>Set your assumptions and tap <strong>Calculate Returns</strong> to see projected rental yields and appreciation across both construction and rental phases.</p>
         </div>
         <div id="yieldResults" style="display:none;"></div>
       </div>
@@ -341,95 +375,21 @@ fbq('track', 'PageView');
     <h2 class="section-title">Shang Properties & Bauhinia Residences</h2>
     <p class="section-desc">Everything you need to know about the developer behind the project and what makes Shang Bauhinia different from anything else in Cebu.</p>
     <div class="faq-grid">
-
-      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">01</span><span class="faq-q-text">Who is Shang Properties and why should I trust them?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag brand">Developer Credibility</span>
-        <p>Shang Properties, Inc. has been <strong>listed on the Philippine Stock Exchange (PSE) since 1991</strong> — over three decades of public accountability and quarterly financial reporting. They are part of The Kuok Group (Malaysia), with over ₱50 billion in managed assets, and affiliated with Shangri-La Hotels & Resorts and Kerry Properties Limited.</p>
-        <p>Since entering residential development in 2002, they have completed every project on schedule. Their portfolio — St. Francis Shangri-La Place, The Rise Makati, Horizon Homes BGC, Shang Salcedo Place, and more — has delivered <strong>129% to 322% total appreciation</strong>. That's verifiable public record, not marketing language.</p>
-        <p>Unlike many developers that rely on pre-selling deposits to fund construction, Shang Properties has institutional backing. Your building gets built regardless of sales velocity.</p>
-      </div></div></div>
-
-      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">02</span><span class="faq-q-text">What is Shang Bauhinia Residences and what makes it different?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag brand">Project Overview</span>
-        <p>Shang Bauhinia Residences is a <strong>53-storey luxury residential tower</strong> on Governor Cuenco Avenue corner Bauhinia Drive, Kasambagan, Cebu City. It is Shang Properties' first project outside Metro Manila — a strategic decision that signals their confidence in Cebu's long-term potential.</p>
-        <p>The project offers 1,027 units — Studios, 1-Bedroom, 2-Bedroom Typical, 2-Bedroom Signature, 3-Bedroom Signature, Garden units, and Penthouses. All units are <strong>delivered fully finished and move-in ready</strong> with digital locksets, laminated wood flooring, inverter AC systems, sintered stone countertops, modular kitchen cabinets, complete appliances, full bathroom fixtures, and fire safety systems.</p>
-        <p>What sets it apart: six internationally acclaimed design firms (P&T Group, FM Architettura, P Landscape), 5,120 sqm of dual-tier resort amenities, SPMSI hospitality-grade property management, 100% residential backup power, and a building-wide water softener system. None of these are standard in Cebu.</p>
-        <a href="https://sbr-overview.ronnelestrada.com/" target="_blank" class="faq-inline-cta">View Full Project Overview →</a>
-      </div></div></div>
-
-      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">03</span><span class="faq-q-text">Where exactly is the project located?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag location">Location</span>
-        <p>The project sits at the convergence of Cebu's three major business districts — a "quiet premium zone" that offers CBD-level access without the density and congestion of being inside the commercial districts.</p>
-        <p><strong>Cebu IT Park:</strong> 0.3 km (3-minute walk). <strong>Cebu Country Club:</strong> 0.2 km (golf course views). <strong>Ayala Center Cebu:</strong> 1.7 km. <strong>Cebu Business Park:</strong> 1.9 km. Nearby schools include Maria Montessori International (2.1 km), Sacred Heart-Ateneo de Cebu (6.9 km), and University of San Carlos (3.1 km). Healthcare access via Perpetual Succour Hospital (2.0 km) and Chong Hua Hospital.</p>
-        <a href="https://spibyronnel.setmore.com" target="_blank" class="faq-inline-cta">Visit the Location in Person →</a>
-      </div></div></div>
-
-      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">04</span><span class="faq-q-text">What unit types are available and what do they cost?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag brand">Units & Pricing</span>
-        <p><strong>Studio (35.33 sqm):</strong> ₱300k - ₱325k price/sqm. Ideal for investment or singles near IT Park.</p>
-        <p><strong>1-Bedroom (50.45 – 64.12 sqm):</strong> ₱331k - ₱433k price/sqm. All include 1 parking. Most versatile for personal use and rental income.</p>
-        <p><strong>2-Bedroom Typical (95.02 – 103.51 sqm):</strong> ₱320k - ₱415k price/sqm. Families of 3–4 or premium rental positioning.</p>
-        <p><strong>2-Bedroom Signature (124 sqm):</strong> From ₱387k price/sqm. Enhanced finishes with branded appliances, exclusive elevator access, and Sky Lounge privileges.</p>
-        <p><strong>3-Bedroom Signature (187.81 sqm):</strong> From ₱410k price/sqm. Flagship residence — master suite with walk-in wardrobe, spa bathroom, and multiple balconies.</p>
-        <p>Pre-selling pricing at ₱300K–₱430K/sqm represents the lowest entry point in the project's lifecycle.</p>
-        <a href="https://spibyronnel.setmore.com" target="_blank" class="faq-inline-cta">Discuss Unit Options in a Private Consultation →</a>
-      </div></div></div>
-
-      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">05</span><span class="faq-q-text">What are the payment terms and financing options?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Financing</span>
-        <p><strong>Reservation:</strong> ₱100,000 (fully applied to the down payment).</p>
-        <p><strong>Standard scheme:</strong> 10% DP / 30% over 66 months during construction. 60% balance due at turnover (December 2031) — payable in cash or via bank financing (BDO, BPI, Metrobank) with terms up to 25 years.</p>
-        <p><strong>Annual payment:</strong> Pay 100% over 7 years equally and receive an <strong>5% discount on the total contract price</strong>. On a ₱9.8M unit, that's roughly ₱488k in savings.</p>
-        <p>Terms can be customized — shorter DP periods, lump sum + monthly combos, or flexible spot payments. Designed for salaried professionals, business owners, and OFW investors alike.</p>
-      </div></div></div>
-
-      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">06</span><span class="faq-q-text">Why is it priced higher than other Cebu condos?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag emotional">Value Justification</span>
-        <p>Most Cebu condos price at ₱140K–₱200K/sqm. Shang Bauhinia is at ₱290K–₱430K/sqm. The premium reflects tangible differences:</p>
-        <p><strong>100% residential backup power.</strong> Most condos only power common areas during brownouts. At Shang Bauhinia, power continues seamlessly in every unit. Cebu's peak demand has exceeded capacity — this commands a ₱3K–₱5K/month rental premium alone.</p>
-        <p><strong>Building-wide water softener.</strong> Cebu's hard water destroys appliances within 3–5 years. This system eliminates ₱100K–₱300K in preventable damage over a decade.</p>
-        <p><strong>SPMSI property management</strong> — Shang's own subsidiary operating at Shangri-La hospitality standards, not an outsourced lowest-bidder.</p>
-        <p><strong>Fully finished turnover.</strong> No ₱200K–₱800K renovation needed before you can rent or move in.</p>
-        <a href="https://spibyronnel.setmore.com" target="_blank" class="faq-inline-cta">See the Quality Firsthand →</a>
-      </div></div></div>
-
-      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">07</span><span class="faq-q-text">What amenities does the project include?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag brand">Lifestyle</span>
-        <p><strong>5,120 sqm of dedicated amenity space</strong> across two tiers:</p>
-        <p><strong>The Clubhouse (4,015 sqm — all residents):</strong> Tropical pool with jacuzzi and kids' splash area, 345 sqm gym with yoga/Pilates studio, function rooms, business lounge, children's playroom, and garden areas.</p>
-        <p><strong>The Sky Lounge (1,105 sqm — Signature & Penthouse only):</strong> A private elevated amenity with panoramic views. Reserved exclusively for 2BR Signature, 3BR Signature, and Penthouse owners — roughly 10% of the building.</p>
-        <p>All amenities maintained by SPMSI to Shangri-La hospitality standards.</p>
-      </div></div></div>
-
-      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">08</span><span class="faq-q-text">When is the turnover date?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag brand">Timeline</span>
-        <p>Target turnover: <strong>December 31, 2031</strong>. DHSUD License to Sell No. 0002155, issued October 7, 2024.</p>
-        <p>Shang Properties has completed every project on schedule since 2002. Their institutional funding structure means construction doesn't depend on buyer deposit collections — the primary cause of delays with other developers. Pre-selling now locks in 2025/2026 pricing for a 2031 asset.</p>
-      </div></div></div>
-
-      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">09</span><span class="faq-q-text">What rental income or appreciation can I expect?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Investment Returns</span>
-        <p>Shang Properties' completed projects have appreciated <strong>129%–322% total</strong> (13–23% annually). While past results don't guarantee future performance, the track record is the strongest in Philippine luxury residential.</p>
-        <p>Cebu's luxury segment commands 5–8% gross yields. Target rental estimates: Studios ₱35K–40K/month, 1-Bedrooms ₱50K–70K/month, 2-Bedrooms ₱95K–120K/month. Shang Bauhinia's backup power and fully finished delivery provide measurable rental premiums over competitors.</p>
-      </div></div></div>
-
-      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">10</span><span class="faq-q-text">Who manages the property after turnover?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag brand">Management</span>
-        <p><strong>Shang Property Management Services Inc. (SPMSI)</strong> — Shang's own 100% subsidiary — manages all residential, retail, and common areas at hospitality-grade standards associated with Shangri-La Hotels.</p>
-        <p>Most developers outsource to the cheapest provider, and quality deteriorates within 5 years. SPMSI applies consistent standards from staff training to facilities maintenance. For investors who won't be on-site, this means your asset is protected by the same entity that built it.</p>
-      </div></div></div>
-
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">01</span><span class="faq-q-text">Who is Shang Properties and why should I trust them?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag brand">Developer Credibility</span><p>Shang Properties, Inc. has been <strong>listed on the Philippine Stock Exchange (PSE) since 1991</strong> — over three decades of public accountability and quarterly financial reporting. They are part of The Kuok Group (Malaysia), with over ₱50 billion in managed assets, and affiliated with Shangri-La Hotels & Resorts and Kerry Properties Limited.</p><p>Since entering residential development in 2002, they have completed every project on schedule. Their portfolio — St. Francis Shangri-La Place, The Rise Makati, Horizon Homes BGC, Shang Salcedo Place, and more — has delivered <strong>129% to 322% total appreciation</strong>. That's verifiable public record, not marketing language.</p><p>Unlike many developers that rely on pre-selling deposits to fund construction, Shang Properties has institutional backing. Your building gets built regardless of sales velocity.</p></div></div></div>
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">02</span><span class="faq-q-text">What is Shang Bauhinia Residences and what makes it different?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag brand">Project Overview</span><p>Shang Bauhinia Residences is a <strong>53-storey luxury residential tower</strong> on Governor Cuenco Avenue corner Bauhinia Drive, Kasambagan, Cebu City. It is Shang Properties' first project outside Metro Manila — a strategic decision that signals their confidence in Cebu's long-term potential.</p><p>The project offers 1,027 units — Studios, 1-Bedroom, 2-Bedroom Typical, 2-Bedroom Signature, 3-Bedroom Signature, Garden units, and Penthouses. All units are <strong>delivered fully finished and move-in ready</strong> with digital locksets, laminated wood flooring, inverter AC systems, sintered stone countertops, modular kitchen cabinets, complete appliances, full bathroom fixtures, and fire safety systems.</p><p>What sets it apart: six internationally acclaimed design firms (P&T Group, FM Architettura, P Landscape), 5,120 sqm of dual-tier resort amenities, SPMSI hospitality-grade property management, 100% residential backup power, and a building-wide water softener system. None of these are standard in Cebu.</p><a href="https://sbr-overview.ronnelestrada.com/" target="_blank" class="faq-inline-cta">View Full Project Overview →</a></div></div></div>
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">03</span><span class="faq-q-text">Where exactly is the project located?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag location">Location</span><p>The project sits at the convergence of Cebu's three major business districts — a "quiet premium zone" that offers CBD-level access without the density and congestion of being inside the commercial districts.</p><p><strong>Cebu IT Park:</strong> 0.3 km (3-minute walk). <strong>Cebu Country Club:</strong> 0.2 km (golf course views). <strong>Ayala Center Cebu:</strong> 1.7 km. <strong>Cebu Business Park:</strong> 1.9 km. Nearby schools include Maria Montessori International (2.1 km), Sacred Heart-Ateneo de Cebu (6.9 km), and University of San Carlos (3.1 km). Healthcare access via Perpetual Succour Hospital (2.0 km) and Chong Hua Hospital.</p><a href="https://spibyronnel.setmore.com" target="_blank" class="faq-inline-cta">Visit the Location in Person →</a></div></div></div>
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">04</span><span class="faq-q-text">What unit types are available and what do they cost?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag brand">Units & Pricing</span><p><strong>Studio (35.33 sqm):</strong> ₱300k–₱325k price/sqm. Ideal for investment or singles near IT Park.</p><p><strong>1-Bedroom (50.45–64.12 sqm):</strong> ₱331k–₱433k price/sqm. All include 1 parking. Most versatile for personal use and rental income.</p><p><strong>2-Bedroom Typical (95.02–103.51 sqm):</strong> ₱320k–₱415k price/sqm. Families of 3–4 or premium rental positioning.</p><p><strong>2-Bedroom Signature (124 sqm):</strong> From ₱387k price/sqm. Enhanced finishes with branded appliances, exclusive elevator access, and Sky Lounge privileges.</p><p><strong>3-Bedroom Signature (187.81 sqm):</strong> From ₱410k price/sqm. Flagship residence — master suite with walk-in wardrobe, spa bathroom, and multiple balconies.</p><p>Pre-selling pricing at ₱300K–₱430K/sqm represents the lowest entry point in the project's lifecycle.</p><a href="https://spibyronnel.setmore.com" target="_blank" class="faq-inline-cta">Discuss Unit Options in a Private Consultation →</a></div></div></div>
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">05</span><span class="faq-q-text">What are the payment terms and financing options?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Financing</span><p><strong>Reservation:</strong> ₱100,000 (fully applied to the down payment).</p><p><strong>Standard scheme:</strong> 10% DP / 30% over 66 months during construction. 60% balance due at turnover (December 2031) — payable in cash or via bank financing (BDO, BPI, Metrobank) with terms up to 25 years.</p><p><strong>Annual payment:</strong> Pay 100% over 7 years equally and receive a <strong>5% discount on the total contract price</strong>. On a ₱9.8M unit, that's roughly ₱488k in savings.</p><p>Terms can be customized — shorter DP periods, lump sum + monthly combos, or flexible spot payments. Designed for salaried professionals, business owners, and OFW investors alike.</p></div></div></div>
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">06</span><span class="faq-q-text">Why is it priced higher than other Cebu condos?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag emotional">Value Justification</span><p>Most Cebu condos price at ₱140K–₱200K/sqm. Shang Bauhinia is at ₱290K–₱430K/sqm. The premium reflects tangible differences:</p><p><strong>100% residential backup power.</strong> Most condos only power common areas during brownouts. At Shang Bauhinia, power continues seamlessly in every unit. Cebu's peak demand has exceeded capacity — this commands a ₱3K–₱5K/month rental premium alone.</p><p><strong>Building-wide water softener.</strong> Cebu's hard water destroys appliances within 3–5 years. This system eliminates ₱100K–₱300K in preventable damage over a decade.</p><p><strong>SPMSI property management</strong> — Shang's own subsidiary operating at Shangri-La hospitality standards, not an outsourced lowest-bidder.</p><p><strong>Fully finished turnover.</strong> No ₱200K–₱800K renovation needed before you can rent or move in.</p><a href="https://spibyronnel.setmore.com" target="_blank" class="faq-inline-cta">See the Quality Firsthand →</a></div></div></div>
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">07</span><span class="faq-q-text">What amenities does the project include?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag brand">Lifestyle</span><p><strong>5,120 sqm of dedicated amenity space</strong> across two tiers:</p><p><strong>The Clubhouse (4,015 sqm — all residents):</strong> Tropical pool with jacuzzi and kids' splash area, 345 sqm gym with yoga/Pilates studio, function rooms, business lounge, children's playroom, and garden areas.</p><p><strong>The Sky Lounge (1,105 sqm — Signature & Penthouse only):</strong> A private elevated amenity with panoramic views. Reserved exclusively for 2BR Signature, 3BR Signature, and Penthouse owners — roughly 10% of the building.</p><p>All amenities maintained by SPMSI to Shangri-La hospitality standards.</p></div></div></div>
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">08</span><span class="faq-q-text">When is the turnover date?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag brand">Timeline</span><p>Target turnover: <strong>December 31, 2031</strong>. DHSUD License to Sell No. 0002155, issued October 7, 2024.</p><p>Shang Properties has completed every project on schedule since 2002. Their institutional funding structure means construction doesn't depend on buyer deposit collections — the primary cause of delays with other developers. Pre-selling now locks in 2025/2026 pricing for a 2031 asset.</p></div></div></div>
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">09</span><span class="faq-q-text">What rental income or appreciation can I expect?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Investment Returns</span><p>Shang Properties' completed projects have appreciated <strong>129%–322% total</strong> (13–23% annually). While past results don't guarantee future performance, the track record is the strongest in Philippine luxury residential.</p><p>Cebu's luxury segment commands 5–8% gross yields. Target rental estimates: Studios ₱35K–40K/month, 1-Bedrooms ₱50K–70K/month, 2-Bedrooms ₱95K–120K/month. Shang Bauhinia's backup power and fully finished delivery provide measurable rental premiums over competitors.</p></div></div></div>
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">10</span><span class="faq-q-text">Who manages the property after turnover?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag brand">Management</span><p><strong>Shang Property Management Services Inc. (SPMSI)</strong> — Shang's own 100% subsidiary — manages all residential, retail, and common areas at hospitality-grade standards associated with Shangri-La Hotels.</p><p>Most developers outsource to the cheapest provider, and quality deteriorates within 5 years. SPMSI applies consistent standards from staff training to facilities maintenance. For investors who won't be on-site, this means your asset is protected by the same entity that built it.</p></div></div></div>
     </div>
   </div>
 </section>
 
-<div class="mid-cta">
-  <div class="mid-cta-inner">
-    <h3>Still Have Questions? Let's Talk in Person.</h3>
-    <p>Every buyer's situation is different. A private consultation lets us walk through your goals, timeline, and budget — then match you with the right unit and payment structure. No pressure, just clarity.</p>
-    <a href="https://spibyronnel.setmore.com" target="_blank" class="btn-gold">Schedule a Free Consultation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg></a>
-  </div>
-</div>
+<div class="mid-cta"><div class="mid-cta-inner"><h3>Still Have Questions? Let's Talk in Person.</h3><p>Every buyer's situation is different. A private consultation lets us walk through your goals, timeline, and budget — then match you with the right unit and payment structure. No pressure, just clarity.</p><a href="https://spibyronnel.setmore.com" target="_blank" class="btn-gold">Schedule a Free Consultation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg></a></div></div>
 
 <!-- FAQ 2: CEBU MARKET -->
 <section class="faq-section" id="faq-cebu" style="background:#fff;">
@@ -438,38 +398,11 @@ fbq('track', 'PageView');
     <h2 class="section-title">Investing in Cebu Real Estate</h2>
     <p class="section-desc">Why Cebu is one of the strongest real estate markets in the Philippines — and what smart buyers need to understand.</p>
     <div class="faq-grid">
-
-      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">01</span><span class="faq-q-text">Why is Cebu considered a strong real estate market?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag location">Market Fundamentals</span>
-        <p>Cebu is the Philippines' fastest-growing metro outside Manila, driven by a <strong>booming IT-BPO sector</strong> (150,000+ professionals), a tourism industry attracting millions annually, and major infrastructure investments including CCLEX and airport expansions.</p>
-        <p>The luxury segment is undersupplied relative to demand. Central Visayas consistently ranks among the top regional economies, with GDP growth rates outpacing the national average. The combination of strong employment, rising incomes, and limited luxury inventory creates conditions for sustained appreciation.</p>
-      </div></div></div>
-
-      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">02</span><span class="faq-q-text">How does Cebu IT Park affect nearby property values?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag location">Location Economics</span>
-        <p>Cebu IT Park is the city's primary BPO hub, operating <strong>24/7</strong>. This creates constant rental demand from professionals who value proximity — especially those on night shifts. Properties within walking distance consistently command higher rents and lower vacancy.</p>
-        <p>Shang Bauhinia is just 300 meters (3-minute walk) from IT Park — one of the closest premium residential options. For investors, this means a built-in tenant pool of well-compensated professionals who prioritize convenience.</p>
-      </div></div></div>
-
-      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">03</span><span class="faq-q-text">Is now a good time to buy pre-selling in Cebu?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Market Timing</span>
-        <p>Pre-selling offers the <strong>lowest possible entry price</strong> in any project's lifecycle. As construction progresses, prices typically increase through periodic escalation — making each month of delay more expensive.</p>
-        <p>Current Cebu conditions favor buyers: infrastructure development is increasing area values, IT-BPO continues expanding, and luxury supply remains limited. The question isn't whether prices will be higher at turnover — it's how much higher.</p>
-        <a href="https://spibyronnel.setmore.com" target="_blank" class="faq-inline-cta">Discuss Timing with a Specialist →</a>
-      </div></div></div>
-
-      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">04</span><span class="faq-q-text">What infrastructure developments are planned for Cebu?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag location">Growth Drivers</span>
-        <p>The <strong>Cebu-Cordova Link Expressway (CCLEX)</strong> has improved Cebu City–Mactan access. Road widening along Governor Cuenco Avenue is improving flow near the business districts. The Mactan-Cebu International Airport expansion supports growing passenger volumes.</p>
-        <p>Additional BPO campuses and mixed-use developments are expanding the economic footprint around IT Park and Cebu Business Park. Each project increases accessibility, economic activity, and property demand in surrounding areas.</p>
-      </div></div></div>
-
-      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">05</span><span class="faq-q-text">How does Cebu compare to Manila for investment?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Comparative Analysis</span>
-        <p>Manila luxury pricing reaches ₱500K–₱700K/sqm in BGC and Makati. Cebu's luxury pricing (₱290K–₱430K/sqm for SBR) represents a <strong>significantly lower entry point with higher growth potential</strong>.</p>
-        <p>Cebu offers faster economic growth, less luxury market saturation, stronger tourism fundamentals, and a lower cost of living. Shang Properties' decision to make Cebu their first regional expansion — after 20+ years exclusively in Metro Manila — speaks to their assessment of the market's long-term potential.</p>
-      </div></div></div>
-
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">01</span><span class="faq-q-text">Why is Cebu considered a strong real estate market?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag location">Market Fundamentals</span><p>Cebu is the Philippines' fastest-growing metro outside Manila, driven by a <strong>booming IT-BPO sector</strong> (150,000+ professionals), a tourism industry attracting millions annually, and major infrastructure investments including CCLEX and airport expansions.</p><p>The luxury segment is undersupplied relative to demand. Central Visayas consistently ranks among the top regional economies, with GDP growth rates outpacing the national average.</p></div></div></div>
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">02</span><span class="faq-q-text">How does Cebu IT Park affect nearby property values?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag location">Location Economics</span><p>Cebu IT Park is the city's primary BPO hub, operating <strong>24/7</strong>. Properties within walking distance consistently command higher rents and lower vacancy.</p><p>Shang Bauhinia is just 300 meters (3-minute walk) from IT Park — one of the closest premium residential options. For investors, this means a built-in tenant pool of well-compensated professionals.</p></div></div></div>
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">03</span><span class="faq-q-text">Is now a good time to buy pre-selling in Cebu?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Market Timing</span><p>Pre-selling offers the <strong>lowest possible entry price</strong> in any project's lifecycle. Current Cebu conditions favor buyers: infrastructure development is increasing area values, IT-BPO continues expanding, and luxury supply remains limited.</p><a href="https://spibyronnel.setmore.com" target="_blank" class="faq-inline-cta">Discuss Timing with a Specialist →</a></div></div></div>
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">04</span><span class="faq-q-text">What infrastructure developments are planned for Cebu?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag location">Growth Drivers</span><p>The <strong>CCLEX</strong> has improved Cebu City–Mactan access. Road widening along Governor Cuenco Avenue is improving flow. The Mactan-Cebu International Airport expansion supports growing passenger volumes. Additional BPO campuses are expanding the economic footprint around IT Park.</p></div></div></div>
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">05</span><span class="faq-q-text">How does Cebu compare to Manila for investment?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Comparative Analysis</span><p>Manila luxury pricing reaches ₱500K–₱700K/sqm in BGC and Makati. Cebu's luxury pricing (₱290K–₱430K/sqm for SBR) represents a <strong>significantly lower entry point with higher growth potential</strong>. Shang Properties' decision to make Cebu their first regional expansion speaks to their assessment of the market.</p></div></div></div>
     </div>
   </div>
 </section>
@@ -481,61 +414,16 @@ fbq('track', 'PageView');
     <h2 class="section-title">Buyer's Guide</h2>
     <p class="section-desc">Essential knowledge for first-time and experienced property buyers in the Philippines.</p>
     <div class="faq-grid">
-
-      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">01</span><span class="faq-q-text">Can foreigners or dual citizens own property in the Philippines?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Ownership Rules</span>
-        <p>Filipino citizens and dual citizens can own land without restrictions. Foreign nationals cannot own land directly, but they <strong>can buy condominium units</strong> as long as total foreign ownership stays below 40% per building.</p>
-        <p>For land access, foreigners may use long-term leases — now up to <strong>99 years under RA 12252 (2025)</strong> — or set up a Filipino-majority corporation. At Shang Bauhinia, foreign buyers are welcome within the 40% cap.</p>
-      </div></div></div>
-
-      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">02</span><span class="faq-q-text">How do I verify if a developer and project are legitimate?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag emotional">Trust & Safety</span>
-        <p>Check the <strong>DHSUD License to Sell (LTS)</strong> and Certificate of Registration online. Review the title for liens, confirm tax clearances, and research the developer's completed projects. <strong>Red flags:</strong> no escrow account, unexplained delays, unapproved zoning.</p>
-        <p>For reference, Shang Bauhinia holds DHSUD LTS No. 0002155 (Oct 7, 2024). Shang Properties is PSE-listed with full quarterly public reporting.</p>
-      </div></div></div>
-
-      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">03</span><span class="faq-q-text">What are the bank loan requirements?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Financing</span>
-        <p>Stable income, ages 21–70, clean credit. Banks require <strong>20–40% down payment</strong> and finance 60–80% LTV. Submit IDs, income proof (payslips/ITR), and developer's Contract to Sell. Approval: 1–2 months. Pag-IBIG offers up to 95% LTV for Filipino citizens.</p>
-        <p>Shang Properties has accredited partner banks including BDO, BPI, and Metrobank for streamlined processing.</p>
-      </div></div></div>
-
-      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">04</span><span class="faq-q-text">Pre-selling vs. ready-for-occupancy — which should I choose?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Strategy</span>
-        <p><strong>Pre-selling:</strong> Lower entry prices, staggered payments over 24–48 months, potential for significant appreciation. Trade-off: multi-year wait — though risk is mitigated with a developer that has a perfect completion record.</p>
-        <p><strong>RFO:</strong> Immediate move-in or rental income, but at higher pricing with no construction-period equity growth. Choose pre-selling for value optimization; RFO for immediate use.</p>
-      </div></div></div>
-
-      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">05</span><span class="faq-q-text">What taxes and fees will I pay at closing?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Taxes & Costs</span>
-        <p>Expect <strong>3–5% of sale price</strong> in closing costs: 1.5% DST, 0.5–0.75% transfer tax, ~1% registration fees (calculated on sale price or zonal value, whichever is higher). Seller covers the 6% CGT or VAT. Prepare a closing cost estimate early to avoid surprises.</p>
-      </div></div></div>
-
-      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">06</span><span class="faq-q-text">How does reservation work? Can I cancel?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag emotional">Commitment & Protection</span>
-        <p>Reservation fees range from <strong>₱10,000–₱50,000</strong> (often non-refundable) to hold your unit, followed by 10–20% down payment in monthly installments. Cancellation may forfeit 10–25% of payments made. Always review grace period and cancellation clauses in your Contract to Sell. Developers are required to maintain escrow accounts.</p>
-      </div></div></div>
-
-      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">07</span><span class="faq-q-text">What rights do condominium owners have?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Ownership Rights</span>
-        <p><strong>Exclusive unit ownership</strong> plus shared ownership of common areas. You vote on building rules through the condo corporation. Monthly dues cover maintenance, security, and amenities. There is <strong>no 50-year expiry</strong> — this is a common myth. Ownership continues as long as the building stands.</p>
-      </div></div></div>
-
-      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">08</span><span class="faq-q-text">What investment returns are realistic?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Investment</span>
-        <p>Philippine rental yields: <strong>5–6% annually</strong> in prime locations. Appreciation: 5–7% per year in metros like Cebu and Manila. Net returns calculated after taxes, dues, and maintenance. Pre-selling properties in high-demand areas with established developers tend to offer the best appreciation during construction.</p>
-      </div></div></div>
-
-      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">09</span><span class="faq-q-text">What are current market trends?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Market Outlook</span>
-        <p>Cebu's <strong>IT-BPO sector and tourism</strong> continue driving demand. Urban rental demand is climbing with infrastructure expansion. BGC condos have appreciated 5–7% annually. Cebu's luxury segment is particularly strong with limited supply driving premium pricing. Emerging areas: Davao and Clark, where infra investments create new demand.</p>
-      </div></div></div>
-
-      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">10</span><span class="faq-q-text">Any recent law changes affecting buyers?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-      <div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Legal Updates</span>
-        <p><strong>RA 12252 (2025)</strong> extends foreign lease terms from 50 to 99 years — major improvement for foreign investor security. <strong>RA 12001</strong> reforms real property valuation for fairer tax assessments. Both signal continued government support for the sector.</p>
-      </div></div></div>
-
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">01</span><span class="faq-q-text">Can foreigners or dual citizens own property in the Philippines?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Ownership Rules</span><p>Filipino citizens and dual citizens can own land without restrictions. Foreign nationals cannot own land directly, but they <strong>can buy condominium units</strong> as long as total foreign ownership stays below 40% per building. Foreigners may use long-term leases — now up to <strong>99 years under RA 12252 (2025)</strong>.</p></div></div></div>
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">02</span><span class="faq-q-text">How do I verify if a developer and project are legitimate?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag emotional">Trust & Safety</span><p>Check the <strong>DHSUD License to Sell (LTS)</strong> and Certificate of Registration online. Review the title for liens, confirm tax clearances, and research the developer's completed projects. Shang Bauhinia holds DHSUD LTS No. 0002155 (Oct 7, 2024).</p></div></div></div>
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">03</span><span class="faq-q-text">What are the bank loan requirements?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Financing</span><p>Stable income, ages 21–70, clean credit. Banks require <strong>20–40% down payment</strong> and finance 60–80% LTV. Approval: 1–2 months. Pag-IBIG offers up to 95% LTV for Filipino citizens. Shang has accredited partner banks including BDO, BPI, and Metrobank.</p></div></div></div>
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">04</span><span class="faq-q-text">Pre-selling vs. ready-for-occupancy — which should I choose?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Strategy</span><p><strong>Pre-selling:</strong> Lower entry prices, staggered payments, significant appreciation potential. <strong>RFO:</strong> Immediate use or rental income, but at higher pricing. Choose pre-selling for value optimization; RFO for immediate needs.</p></div></div></div>
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">05</span><span class="faq-q-text">What taxes and fees will I pay at closing?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Taxes & Costs</span><p>Expect <strong>3–5% of sale price</strong> in closing costs: 1.5% DST, 0.5–0.75% transfer tax, ~1% registration fees. Seller covers the 6% CGT or VAT.</p></div></div></div>
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">06</span><span class="faq-q-text">How does reservation work? Can I cancel?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag emotional">Commitment & Protection</span><p>Reservation fees range from ₱10,000–₱100,000 to hold your unit, followed by down payment in monthly installments. Cancellation may forfeit 10–25% of payments made. Always review cancellation clauses in your Contract to Sell.</p></div></div></div>
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">07</span><span class="faq-q-text">What rights do condominium owners have?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Ownership Rights</span><p><strong>Exclusive unit ownership</strong> plus shared common areas. You vote on rules through the condo corporation. There is <strong>no 50-year expiry</strong> — this is a common myth.</p></div></div></div>
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">08</span><span class="faq-q-text">What investment returns are realistic?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Investment</span><p>Philippine rental yields: <strong>5–6% annually</strong> in prime locations. Appreciation: 5–7% per year in metros like Cebu and Manila. Pre-selling properties with established developers tend to offer the best appreciation during construction.</p></div></div></div>
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">09</span><span class="faq-q-text">What are current market trends?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Market Outlook</span><p>Cebu's <strong>IT-BPO sector and tourism</strong> continue driving demand. Cebu's luxury segment is particularly strong with limited supply driving premium pricing.</p></div></div></div>
+      <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)"><span class="faq-num">10</span><span class="faq-q-text">Any recent law changes affecting buyers?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button><div class="faq-answer"><div class="faq-answer-inner"><span class="faq-tag logical">Legal Updates</span><p><strong>RA 12252 (2025)</strong> extends foreign lease terms from 50 to 99 years. <strong>RA 12001</strong> reforms real property valuation for fairer tax assessments. Both signal continued government support for the sector.</p></div></div></div>
     </div>
   </div>
 </section>
@@ -558,15 +446,18 @@ fbq('track', 'PageView');
 <script>
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
+
+// === COST OF WAITING CALCULATOR ===
 const unitData = {
   'studio': { price: 10890000, sqm: 35.33 }, '1br-small': { price: 17370000, sqm: 50.45 },
   '1br-mid': { price: 18820000, sqm: 56.83 }, '1br-large': { price: 23540000, sqm: 64.12 },
   '2br-typical': { price: 30450000, sqm: 95.02 }, '2br-large': { price: 35560000, sqm: 103.51 },
-  '2br-sig': { price: 45500000, sqm: 127.39 }, '3br-sig': { price: 74800000, sqm: 186.68 }
+  '2br-sig': { price: 45500000, sqm: 124 }, '3br-sig': { price: 74800000, sqm: 187.81 }
 };
 document.getElementById('unitType').addEventListener('change', function() {
   document.getElementById('currentPrice').value = unitData[this.value].price;
 });
+
 function setupRange(id, displayId, suffix, formatter) {
   const el = document.getElementById(id), display = document.getElementById(displayId);
   function update() {
@@ -579,8 +470,10 @@ function setupRange(id, displayId, suffix, formatter) {
 setupRange('escalation', 'escDisplay', '%');
 setupRange('delayMonths', 'delayDisplay', '', v => v + (v === 1 ? ' month' : ' months'));
 setupRange('bankRate', 'bankDisplay', '%');
+
 function formatPeso(n) { return n >= 1e6 ? '₱' + (n/1e6).toFixed(2) + 'M' : n >= 1e3 ? '₱' + (n/1e3).toFixed(0) + 'K' : '₱' + n.toLocaleString(); }
 function formatPesoFull(n) { return '₱' + Math.round(n).toLocaleString(); }
+
 function calculate() {
   const price = parseFloat(document.getElementById('currentPrice').value);
   const escAnnual = parseFloat(document.getElementById('escalation').value) / 100;
@@ -610,20 +503,21 @@ function calculate() {
     <div class="comparison-bar-section"><div class="comparison-label">Equity Gained vs. Bank Interest</div><div class="bar-container"><div class="bar-segment bar-invest" style="width:${investPct}%">${investPct > 15 ? formatPeso(equityGained) : ''}</div><div class="bar-segment bar-lost" style="width:${bankPct}%">${bankPct > 15 ? formatPeso(bankEarnings) : ''}</div></div><div class="bar-legend"><span class="leg-invest">Pre-selling equity</span><span class="leg-lost">Bank interest</span></div></div>
     <div class="insight-box" style="margin-top:20px"><div class="insight-icon">💡</div><h4>The Bottom Line</h4><p>Waiting ${months} month${months>1?'s':''} costs you <strong>${formatPeso(opportunityCost)} more</strong> than what your money would earn in the bank. Every month you act earlier puts <strong>${formatPesoFull(costPerMonth)}</strong> of value on your side.</p><p style="margin-top:12px"><a href="https://spibyronnel.setmore.com" target="_blank">Book a private consultation</a> to find the best unit for your goals.</p></div>`;
   if (window.innerWidth < 769) resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  // FB Pixel: Track Cost of Waiting calculation
   if(typeof fbq==='function') fbq('trackCustom','CostOfWaitingCalc',{unit:document.getElementById('unitType').value,price:price,months:months});
 }
 
-// === RENTAL YIELD & APPRECIATION CALCULATOR ===
+// === RENTAL YIELD & APPRECIATION — TWO-PHASE PRE-SELLING MODEL ===
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
 const yieldUnitData = {
-  'studio':     { price: 10890000, sqm: 35.33, rent: 30000 },
+  'studio':     { price: 10890000, sqm: 35.33, rent: 35000 },
   '1br-small':  { price: 17370000, sqm: 50.45, rent: 50000 },
   '1br-mid':    { price: 18820000, sqm: 56.83, rent: 60000 },
   '1br-large':  { price: 23540000, sqm: 64.12, rent: 65000 },
-  '2br-typical':{ price: 30450000, sqm: 95.02, rent: 85000 },
-  '2br-large':  { price: 35560000, sqm: 103.51, rent: 95000 },
-  '2br-sig':    { price: 45500000, sqm: 127.39, rent: 110000 },
-  '3br-sig':    { price: 74800000, sqm: 186.68, rent: 150000 }
+  '2br-typical':{ price: 30450000, sqm: 95.02, rent: 95000 },
+  '2br-large':  { price: 35560000, sqm: 103.51, rent: 105000 },
+  '2br-sig':    { price: 45500000, sqm: 124, rent: 120000 },
+  '3br-sig':    { price: 74800000, sqm: 187.81, rent: 160000 }
 };
 
 document.getElementById('yieldUnit').addEventListener('change', function() {
@@ -647,94 +541,144 @@ function calcYield() {
   const holdYears = parseInt(document.getElementById('holdYears').value);
   const occRate = parseFloat(document.getElementById('occRate').value) / 100;
 
+  // Date calculations (months are 0-indexed from the select values)
+  const pM = parseInt(document.getElementById('purchaseMonth').value);
+  const pY = parseInt(document.getElementById('purchaseYear').value);
+  const rM = parseInt(document.getElementById('rentalMonth').value);
+  const rY = parseInt(document.getElementById('rentalYear').value);
+
+  const purchaseDate = new Date(pY, pM, 1);
+  const rentalDate = new Date(rY, rM, 1);
+
+  // Construction period in months
+  const constructionMonths = Math.max(0, (rY - pY) * 12 + (rM - pM));
+  const constructionYears = (constructionMonths / 12);
+
+  // Annual costs (only apply during rental phase)
   const monthlyDues = duesPerSqm * unit.sqm;
-  const annualRentGross = monthlyRent * 12 * occRate;
   const annualDues = monthlyDues * 12;
-  const annualRPT = price * 0.005; // ~0.5% estimate
+  const annualRPT = price * 0.005;
+  const annualRentGross = monthlyRent * 12 * occRate;
   const annualNetRent = annualRentGross - annualDues - annualRPT;
-  const grossYield = (annualRentGross / price) * 100;
-  const netYield = (annualNetRent / price) * 100;
+
+  // Yield on purchase price (what investor actually paid — most relevant metric)
+  const grossYieldOnCost = (annualRentGross / price) * 100;
+  const netYieldOnCost = (annualNetRent / price) * 100;
+
+  // Value at turnover
+  const turnoverValue = price * Math.pow(1 + appRate, constructionYears);
+
+  const purchaseLabel = MONTHS[pM] + ' ' + pY;
+  const rentalLabel = MONTHS[rM] + ' ' + rY;
 
   // Year-by-year projection
   let rows = '';
-  let totalRent = 0, totalAppreciation = 0;
+  let totalRent = 0;
   let propValue = price;
+
   for (let y = 1; y <= holdYears; y++) {
+    const calYear = pY + y;
     const prevValue = propValue;
     propValue = propValue * (1 + appRate);
     const yearAppreciation = propValue - prevValue;
-    const yearRent = annualNetRent;
+
+    // Determine months of rental income in this year
+    // Year y spans from purchase anniversary (y-1) to (y)
+    const yearStartDate = new Date(pY + y - 1, pM, 1);
+    const yearEndDate = new Date(pY + y, pM, 1);
+
+    let monthsRenting = 0;
+    if (yearEndDate <= rentalDate) {
+      // Entire year is before rental start
+      monthsRenting = 0;
+    } else if (yearStartDate >= rentalDate) {
+      // Entire year is rental
+      monthsRenting = 12;
+    } else {
+      // Transition year: partial rental
+      monthsRenting = Math.max(0, (yearEndDate - rentalDate) / (1000 * 60 * 60 * 24 * 30.44));
+      monthsRenting = Math.min(12, Math.round(monthsRenting));
+    }
+
+    const yearRent = monthsRenting > 0 ? (annualNetRent / 12) * monthsRenting : 0;
     totalRent += yearRent;
-    totalAppreciation += yearAppreciation;
     const totalReturn = totalRent + (propValue - price);
-    rows += `<tr>
-      <td>Year ${y}</td>
-      <td>${formatPeso(propValue)}</td>
-      <td class="positive">+${formatPeso(yearAppreciation)}</td>
-      <td>${formatPeso(yearRent)}</td>
-      <td class="positive">${formatPeso(totalReturn)}</td>
-    </tr>`;
+    const isRenting = monthsRenting > 0;
+    const isPartial = monthsRenting > 0 && monthsRenting < 12;
+
+    let phaseHTML;
+    if (!isRenting) {
+      phaseHTML = '<span class="phase-badge construction">Construction</span>';
+    } else if (isPartial) {
+      phaseHTML = '<span class="phase-badge rental">Rental (' + monthsRenting + ' mo)</span>';
+    } else {
+      phaseHTML = '<span class="phase-badge rental">Rental</span>';
+    }
+
+    rows += '<tr>' +
+      '<td>Year ' + y + ' <span style="color:var(--muted);font-size:0.72rem;">(' + calYear + ')</span></td>' +
+      '<td>' + formatPeso(propValue) + '</td>' +
+      '<td class="positive">+' + formatPeso(yearAppreciation) + '</td>' +
+      '<td>' + (isRenting ? formatPeso(yearRent) : '<span class="dimmed">—</span>') + '</td>' +
+      '<td>' + phaseHTML + '</td>' +
+      '<td class="positive">' + formatPeso(totalReturn) + '</td>' +
+    '</tr>';
   }
+
   // Total row
   const totalReturn = totalRent + (propValue - price);
   const totalROI = ((totalReturn) / price * 100).toFixed(1);
-  rows += `<tr class="total-row">
-    <td>Total</td>
-    <td>${formatPeso(propValue)}</td>
-    <td class="positive">+${formatPeso(propValue - price)}</td>
-    <td>${formatPeso(totalRent)}</td>
-    <td class="positive">${formatPeso(totalReturn)}</td>
-  </tr>`;
+  const rentalYearsApprox = Math.max(0, holdYears - Math.ceil(constructionYears));
+
+  rows += '<tr class="total-row">' +
+    '<td>Total</td>' +
+    '<td>' + formatPeso(propValue) + '</td>' +
+    '<td class="positive">+' + formatPeso(propValue - price) + '</td>' +
+    '<td>' + formatPeso(totalRent) + '</td>' +
+    '<td>' + (rentalYearsApprox > 0 ? '~' + rentalYearsApprox + ' yr' + (rentalYearsApprox > 1 ? 's' : '') + ' rental' : '—') + '</td>' +
+    '<td class="positive">' + formatPeso(totalReturn) + '</td>' +
+  '</tr>';
 
   const resultsDiv = document.getElementById('yieldResults');
   document.getElementById('yieldPlaceholder').style.display = 'none';
   resultsDiv.style.display = 'block';
 
-  resultsDiv.innerHTML = `
-    <h3 class="calc-panel-title">${holdYears}-Year Investment Projection</h3>
-    <div class="yield-results-grid">
-      <div class="yield-card result-card gain"><div class="result-label">Gross Rental Yield</div><div class="result-number">${grossYield.toFixed(1)}%</div><div class="result-note">${formatPesoFull(annualRentGross)}/year at ${(occRate*100).toFixed(0)}% occupancy</div></div>
-      <div class="yield-card result-card ${netYield > 0 ? 'gain' : 'loss'}"><div class="result-label">Net Rental Yield</div><div class="result-number">${netYield.toFixed(1)}%</div><div class="result-note">After dues (${formatPesoFull(annualDues)}) + RPT (${formatPesoFull(annualRPT)})</div></div>
-      <div class="yield-card result-card neutral"><div class="result-label">Projected Value (Year ${holdYears})</div><div class="result-number">${formatPeso(propValue)}</div><div class="result-note">From ${formatPeso(price)} at ${(appRate*100).toFixed(1)}%/year</div></div>
-      <div class="yield-card result-card gain"><div class="result-label">Total ROI (${holdYears} Years)</div><div class="result-number">${totalROI}%</div><div class="result-note">Appreciation + net rental income combined</div></div>
-    </div>
-    <div style="overflow-x:auto;">
-      <table class="year-table">
-        <thead><tr><th>Period</th><th>Property Value</th><th>Appreciation</th><th>Net Rent</th><th>Cumulative Return</th></tr></thead>
-        <tbody>${rows}</tbody>
-      </table>
-    </div>
-    <div class="yield-summary-box">
-      <h4>Investment Summary</h4>
-      <p>Over ${holdYears} years, a ${formatPeso(price)} investment in Shang Bauhinia could generate <strong>${formatPeso(totalRent)}</strong> in net rental income plus <strong>${formatPeso(propValue - price)}</strong> in capital appreciation — a combined return of <strong>${formatPeso(totalReturn)} (${totalROI}% ROI)</strong>. That's the power of locking in pre-selling pricing today.</p>
-      <a href="https://spibyronnel.setmore.com" target="_blank" class="faq-inline-cta" style="margin-top:16px;" onclick="trackBooking('yield_calculator')">Find the Right Unit for Your Goals →</a>
-    </div>`;
+  resultsDiv.innerHTML =
+    '<h3 class="calc-panel-title">' + holdYears + '-Year Investment Projection</h3>' +
+    '<div class="phase-info">' +
+      '<strong>Two-Phase Model:</strong> Appreciation compounds from purchase (' + purchaseLabel + '). ' +
+      'Rental income begins ' + rentalLabel + ' — a <strong>' + constructionYears.toFixed(1) + '-year</strong> construction period with appreciation only.' +
+    '</div>' +
+    '<div class="yield-results-grid">' +
+      '<div class="yield-card result-card gain"><div class="result-label">Gross Yield (on Purchase Price)</div><div class="result-number">' + grossYieldOnCost.toFixed(1) + '%</div><div class="result-note">' + formatPesoFull(annualRentGross) + '/year at ' + (occRate*100).toFixed(0) + '% occupancy</div></div>' +
+      '<div class="yield-card result-card ' + (netYieldOnCost > 0 ? 'gain' : 'loss') + '"><div class="result-label">Net Yield (on Purchase Price)</div><div class="result-number">' + netYieldOnCost.toFixed(1) + '%</div><div class="result-note">After dues (' + formatPesoFull(annualDues) + ') + RPT (' + formatPesoFull(annualRPT) + ')</div></div>' +
+      '<div class="yield-card result-card neutral"><div class="result-label">Value at Turnover</div><div class="result-number">' + formatPeso(turnoverValue) + '</div><div class="result-note">Pre-rental appreciation over ' + constructionYears.toFixed(1) + ' years</div></div>' +
+      '<div class="yield-card result-card gain"><div class="result-label">Total ROI (' + holdYears + ' Years)</div><div class="result-number">' + totalROI + '%</div><div class="result-note">Appreciation + ~' + rentalYearsApprox + ' year' + (rentalYearsApprox !== 1 ? 's' : '') + ' net rental</div></div>' +
+    '</div>' +
+    '<div style="overflow-x:auto;">' +
+      '<table class="year-table">' +
+        '<thead><tr><th>Period</th><th>Value</th><th>Appreciation</th><th>Net Rent</th><th>Phase</th><th>Cumulative</th></tr></thead>' +
+        '<tbody>' + rows + '</tbody>' +
+      '</table>' +
+    '</div>' +
+    '<div class="yield-summary-box">' +
+      '<h4>Investment Summary</h4>' +
+      '<p>Over ' + holdYears + ' years from a ' + purchaseLabel + ' purchase, your ' + formatPeso(price) + ' investment could grow to <strong>' + formatPeso(propValue) + '</strong> in property value (+' + formatPeso(propValue - price) + ' appreciation). After turnover in ' + rentalLabel + ', ~' + rentalYearsApprox + ' year' + (rentalYearsApprox !== 1 ? 's' : '') + ' of rental income adds <strong>' + formatPeso(totalRent) + '</strong> — for a combined total return of <strong>' + formatPeso(totalReturn) + ' (' + totalROI + '% ROI)</strong>.</p>' +
+      '<a href="https://spibyronnel.setmore.com" target="_blank" class="faq-inline-cta" style="margin-top:16px;">Find the Right Unit for Your Goals →</a>' +
+    '</div>';
 
   if (window.innerWidth < 769) resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  // FB Pixel: Track Yield calculation
-  if(typeof fbq==='function') fbq('trackCustom','YieldCalcComplete',{unit:unitKey,price:price,grossYield:grossYield.toFixed(1),netYield:netYield.toFixed(1),holdYears:holdYears,totalROI:totalROI});
+  if(typeof fbq==='function') fbq('trackCustom','YieldCalcComplete',{unit:unitKey,price:price,grossYield:grossYieldOnCost.toFixed(1),netYield:netYieldOnCost.toFixed(1),holdYears:holdYears,totalROI:totalROI,constructionYears:constructionYears.toFixed(1)});
 }
 
 // === FB PIXEL EVENT TRACKING ===
-function trackBooking(source) {
-  if(typeof fbq==='function') fbq('track','Schedule',{content_name:'SBR Site Visit',source:source});
-}
-// Track all Setmore booking link clicks
 document.addEventListener('click', function(e) {
   const link = e.target.closest('a[href*="setmore.com"]');
-  if (link) {
-    if(typeof fbq==='function') fbq('track','Schedule',{content_name:'SBR Site Visit',source:link.closest('.mid-cta')?'mid_cta':link.closest('.cta-banner')?'footer_cta':link.closest('.nav')?'nav':'inline'});
-  }
-  // Track overview link clicks
+  if (link && typeof fbq==='function') fbq('track','Schedule',{content_name:'SBR Site Visit',source:link.closest('.mid-cta')?'mid_cta':link.closest('.cta-banner')?'footer_cta':link.closest('.nav')?'nav':'inline'});
   const overviewLink = e.target.closest('a[href*="sbr-overview"]');
-  if (overviewLink) {
-    if(typeof fbq==='function') fbq('track','ViewContent',{content_name:'SBR Overview',content_type:'product'});
-  }
-  // Track portfolio link clicks
+  if (overviewLink && typeof fbq==='function') fbq('track','ViewContent',{content_name:'SBR Overview',content_type:'product'});
   const portfolioLink = e.target.closest('a[href*="ronnelestrada.com"]');
-  if (portfolioLink && !portfolioLink.href.includes('sbr-overview') && !portfolioLink.href.includes('setmore')) {
-    if(typeof fbq==='function') fbq('track','Contact',{content_name:'Ronnel Portfolio'});
-  }
+  if (portfolioLink && !portfolioLink.href.includes('sbr-overview') && !portfolioLink.href.includes('setmore') && typeof fbq==='function') fbq('track','Contact',{content_name:'Ronnel Portfolio'});
 });
 
 function toggleFaq(btn) {
